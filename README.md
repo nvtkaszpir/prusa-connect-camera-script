@@ -21,6 +21,7 @@ Linux shell script to send still camera images to Prusa Connect
 
 - Raspberry Pi CSI cameras such as [Raspberry Pi Cam](https://www.raspberrypi.com/documentation/accessories/camera.html)
 - most of USB cameras if they work under Linux
+- esphome cameras using `esp32_camera_web_server` with `snapshot` module
 
 ## Requirements
 
