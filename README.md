@@ -41,8 +41,11 @@ Linux shell script to send still camera images to Prusa Connect
 ssh pi@your-device
 mkdir /home/pi/src
 cd /home/pi/src
-git clone git@github.com:nvtkaszpir/prusa-connect-camera-script.git
+git clone https://github.com/nvtkaszpir/prusa-connect-camera-script.git
 cd prusa-connect-camera-script
+sudo cp prusa-connect-camera@.service /etc/systemd/system/prusa-connect-camera@.service
+sudo systemd daemon-reload
+
 ```
 
 ## Configuration
@@ -149,9 +152,8 @@ So in short:
 cd /home/pi/src/prusa-connect-camera-script/
 cp csi.dist .csi
 # edit .csi and set custom command params, token and fingerprint etc...
-sudo cp prusa-connect-camera@.service /etc/systemd/system/prusa-connect-camera@csi.service
-sudo systemd daemon-reload
 sudo systemctl enable prusa-connect-camera@csi.service
+sudo systemctl start prusa-connect-camera@csi.service
 sudo systemctl status prusa-connect-camera@csi.service
 ```
 
@@ -161,8 +163,15 @@ For another camera, let say for another camera attached over USB
 cd /home/pi/src/prusa-connect-camera-script/
 cp usb.dist .usb1
 # edit .usb1 and set device, token and fingerprint etc...
-sudo cp prusa-connect-camera@.service /etc/systemd/system/prusa-connect-camera@usb1.service
-sudo systemd daemon-reload
 sudo systemctl enable prusa-connect-camera@usb1.service
+sudo systemctl start prusa-connect-camera@usb1.service
 sudo systemctl status prusa-connect-camera@usb1.service
 ```
+
+## Advanced configuration
+
+### Getting higher camera images
+
+Use v4l2-ctl to get the list of available resolutions that camera provides
+and then update it in the env var configs. Test changes.
+Notice that Prusa Connect has file size limit something about 8MB of the image uploaded.
