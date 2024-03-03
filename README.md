@@ -5,6 +5,7 @@ Linux shell script to send still camera images to Prusa Connect
 ## Known limitations
 
 - TODO: camera pre-configuration is not yet supported
+  (such as fixed white balance etc)
 - this script performs processing of the single camera, if you need more cameras
   then just create multiple copies with different settings (see below)
 - TODO: remote streams such as RTSP via ffmpeg
@@ -133,7 +134,7 @@ listed from command above, notice not every device is an actual camera.
   for example set it to `fingerprint-myprinter2-camera-2`
 - save edited file `.usb`
 
-### ESPHome camera
+### ESPHome camera snapshot
 
 With esphome we can use the ultimate power of `curl` command to fetch the image
 from the camera :D
@@ -151,14 +152,43 @@ from the camera :D
       mode: snapshot
   ```
 
-- copy `esphome.dist` as `.esphome`
-- in copied file `.esphome` replace `token-change-me` with the value of the token
-  you copied
-- in copied file `.esphome` replace `fingerprint-change-me` with some random value,
-  which is alphanumeric and has at least 16 chars (and max of 40 chars),
+- copy `esphome-snapshot.dist` as `.esphome-snapshot`
+- in copied file `.esphome-snapshot` replace `token-change-me` with the value
+  of the token you copied
+- in copied file `.esphome-snapshot` replace `fingerprint-change-me` with some
+  random value, which is alphanumeric and has at least 16 chars (and max of 40 chars),
   for example set it to `fingerprint-myprinter3-camera-3`
-- in copied file `.esphome` replace your esphome device address in `CAMERA_COMMAND_EXTRA_PARAMS`
-- save edited file `.esphome`
+- in copied file `.esphome-snapshot` replace your esphome device address and port
+  in `CAMERA_COMMAND_EXTRA_PARAMS`
+- save edited file `.esphome-snapshot`
+
+### ESPHome camera stream
+
+With esphome we can use the `ffmpeg` to fetch the image from the camera:
+
+- install esphome [camera](https://esphome.io/components/esp32_camera.html)
+  on the device and add `esp32_camera` and `esp32_camera_web_server` with
+  `stream` modules:
+
+  ```yaml
+  esp32_camera:
+  ... (skipped due to the fact there are different modules)
+
+  esp32_camera_web_server:
+    - port: 8080
+      mode: stream
+  ```
+
+- copy `esphome-stream.dist` as `.esphome-stream`
+- in copied file `.esphome-stream` replace `token-change-me` with the value
+  of the token you copied
+- in copied file `.esphome-stream` replace `fingerprint-change-me` with some
+  random value, which is alphanumeric and has at least 16 chars (and max of 40 chars),
+  for example set it to `fingerprint-myprinter3-camera-3`
+- in copied file `.esphome-stream` replace your esphome device address and port
+  in `CAMERA_COMMAND_EXTRA_PARAMS`
+- notice that `-update 1` may not be needed in certain ffmpeg versions
+- save edited file `.esphome-stream`
 
 ## Test the config
 
@@ -223,6 +253,16 @@ sudo systemctl status prusa-connect-camera@usb1.service
 Use v4l2-ctl to get the list of available resolutions that camera provides
 and then update it in the env var configs. Test changes.
 Notice that Prusa Connect has file size limit something about 8MB of the image uploaded.
+
+## ffmpeg esphome frame from a stream
+
+Notice, output messages and flags differ depending on the ffmpeg version
+
+ffmpeg 5.x:
+
+```shell
+ffmpeg -y -i "http://esp32-wrover-0461c8.local:8080/" -vframes 1 -q:v 1 -f image2 -update 1 ffpeg-esphome-stream.jpg
+```
 
 ## Performance
 

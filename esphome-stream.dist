@@ -1,0 +1,6 @@
+PRINTER_ADDRESS=127.0.0.1
+PRUSA_CONNECT_CAMERA_TOKEN=token-change-me
+PRUSA_CONNECT_CAMERA_FINGERPRINT=fingerprint-change-me
+CAMERA_DEVICE=/dev/null
+CAMERA_COMMAND=ffmpeg
+CAMERA_COMMAND_EXTRA_PARAMS='-y -i "http://esp32-wrover-0461c8.local:8080/" -vframes 1 -q:v 1 -f image2 -update 1 '
