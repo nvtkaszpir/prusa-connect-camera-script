@@ -102,6 +102,8 @@ There are some example configs depending on what camera you have.
 
 - `csi.dist` - for CSI attached cameras via ribbon to Raspberry Pi
 - `usb.dist` - for generic USB cameras attached via USB to any linux device
+- `esphome-shapshot.dist` - for generic esphome with camera + web component
+- `esphome-stream.dist` - for generic esphome with camera + web component
 
 Notice that each camera should have different fingerprint and token.
 Do not change fingerprint after launching the script - thus camera is registered
