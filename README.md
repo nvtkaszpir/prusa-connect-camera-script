@@ -257,6 +257,12 @@ Use `v4l2-ctl` to get the list of available resolutions that camera provides
 and then update it in the env var configs. Test changes.
 Notice that Prusa Connect has file size limit something about 8MB of the image uploaded.
 
+For Raspberry Cam v2 you could use `csi.dist` as ssource and add
+`--mode 2592:1944:12:P` to the CAMERA_COMMAND_EXTRA_PARAMS.
+
+For certain USB cameras (such as Tracer Endoscope) you shoudl use `usb.dist` and
+you should be able to add `--resolution 1280x960` to the CAMERA_COMMAND_EXTRA_PARAMS.
+
 ## Performance
 
 - Raspberry Pi Zero W is able to process CSI camera (Rpi Cam v2) and USB 2k camera
