@@ -4,14 +4,18 @@ Linux shell script to send still camera images to Prusa Connect
 
 ## Known limitations
 
+- TODO: camera pre-configuration is not yet supported
 - this script performs processing of the single camera, if you need more cameras
   then just create multiple copies with different settings (see below)
-- I was not able to test EVERY setting so this may still have some bugs
-- remote streams such as RTSP not tested yet
+- TODO: remote streams such as RTSP via ffmpeg
 - Rpi Zero W or older devices may have CPU limitations to process remote streams
   or multiple cameras at once
+
+- I was not able to test EVERY setting so this may still have some bugs
 - Prusa Connect will not show camera image if the printer is not alive, this is
   Prusa Connect limitation.
+- default settings are quire generic and thus low camera quality, you need to adjust
+  them, see advanced configuration at the end
 
 ## Supported devices
 
@@ -35,15 +39,30 @@ Linux shell script to send still camera images to Prusa Connect
   - `ffmpeg` - for custom commands for capturing remote streams
   - you-name-it - for custom commands beyond my imagination
 
+## Architecture
+
+```mermaid
+sequenceDiagram
+    script->>script: initial checks
+    script->>script: start loop
+    script->>camera_command: Call camera command
+    camera_command->>image_on_disk: camera command writes image to disk
+    image_on_disk->>script: read image from disk for further processing
+    script->>curl: run curl to post image to Prusa Connect API (pass image_on_disk)
+    curl->>script: return response code / messages
+    script->>script: sleep + end loop
+
+```
+
 ## Installation
 
 ```shell
 ssh pi@your-device
-mkdir /home/pi/src
+mkdir -p /home/pi/src
 cd /home/pi/src
 git clone https://github.com/nvtkaszpir/prusa-connect-camera-script.git
 cd prusa-connect-camera-script
-sudo cp prusa-connect-camera@.service /etc/systemd/system/prusa-connect-camera@.service
+sudo cp -f prusa-connect-camera@.service /etc/systemd/system/prusa-connect-camera@.service
 sudo systemd daemon-reload
 
 ```
@@ -175,3 +194,10 @@ sudo systemctl status prusa-connect-camera@usb1.service
 Use v4l2-ctl to get the list of available resolutions that camera provides
 and then update it in the env var configs. Test changes.
 Notice that Prusa Connect has file size limit something about 8MB of the image uploaded.
+
+## Performance
+
+- Raspberry Pi Zero W is able to process CSI camera (Rpi Cam v2) and USB 2k camera
+  but it has load average about 1.4, and CPU is quite well utilized, so you may
+  need to decrease resolution per camera to see how it goes.
+- ffdshow is usually noticeably slow and cpu intensive.
