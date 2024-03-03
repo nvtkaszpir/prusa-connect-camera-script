@@ -249,6 +249,17 @@ sudo systemctl start prusa-connect-camera@usb1.service
 sudo systemctl status prusa-connect-camera@usb1.service
 ```
 
+For esphome camera, for static images:
+
+```shell
+cd /home/pi/src/prusa-connect-camera-script/
+cp esphome-snapshot.dist .esphome1
+# edit .esphome1 and set device, token and fingerprint etc...
+sudo systemctl enable prusa-connect-camera@esphome1.service
+sudo systemctl start prusa-connect-camera@esphome1.service
+sudo systemctl status prusa-connect-camera@esphome1.service
+```
+
 ## Advanced configuration
 
 ### Getting higher quality camera images
