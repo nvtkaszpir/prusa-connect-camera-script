@@ -1,0 +1,6 @@
+PRINTER_ADDRESS=127.0.0.1
+PRUSA_CONNECT_CAMERA_TOKEN=token-change-me
+PRUSA_CONNECT_CAMERA_FINGERPRINT=fingerprint-change-me
+CAMERA_DEVICE=/dev/video0
+CAMERA_COMMAND=rpicam-still
+CAMERA_COMMAND_EXTRA_PARAMS="--immediate --nopreview --mode 2592:1944:12:P --lores-width 0 --lores-height 0 --thumb none -o"

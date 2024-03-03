@@ -1,0 +1,11 @@
+[Unit]
+Description=Prusa Connect Camera Script
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+EnvironmentFile=/home/pi/src/prusa-connect-camera-script/.%i
+ExecStart=/home/pi/src/prusa-connect-camera-script/prusa-connect-camera.sh
+Restart=on-failure
