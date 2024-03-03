@@ -63,7 +63,7 @@ cd /home/pi/src
 git clone https://github.com/nvtkaszpir/prusa-connect-camera-script.git
 cd prusa-connect-camera-script
 sudo cp -f prusa-connect-camera@.service /etc/systemd/system/prusa-connect-camera@.service
-sudo systemd daemon-reload
+sudo systemctl daemon-reload
 
 ```
 
@@ -163,7 +163,7 @@ So in short:
 - copy `csi.dist` as `.csi` and edit it
 - copy `prusa-connect-camera@.service` as `prusa-connect-camera@csi.service`
 - you may additionally edit unit file if you use different config paths
-- run systemd daemon-reload
+- run systemctl daemon-reload
 - enable systemd service
 - start systemd service
 
