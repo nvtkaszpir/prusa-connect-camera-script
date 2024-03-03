@@ -122,7 +122,7 @@ fi
 
 if [[ -z "${command_capture}" ]]; then
   if type ${CAMERA_COMMAND} >/dev/null 2>/dev/null ; then
-    echo "Using $CAMERA_COMMAND}"
+    echo "Using ${CAMERA_COMMAND}"
     command_capture="${CAMERA_COMMAND}"
   else
     echo "ERROR: missing ${CAMERA_COMMAND}"

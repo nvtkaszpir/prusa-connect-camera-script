@@ -124,8 +124,7 @@ listed from command above, notice not every device is an actual camera.
 
 ### USB camera
 
-- copy `usb.dist` as `.usb` if you want to use Raspberry Pi camera
-
+- copy `usb.dist` as `.usb`
 - in copied file `.usb` replace `token-change-me` with the value of the token
   you copied
 - in copied file `.usb` replace `fingerprint-change-me` with some random value,
@@ -133,11 +132,40 @@ listed from command above, notice not every device is an actual camera.
   for example set it to `fingerprint-myprinter2-camera-2`
 - save edited file `.usb`
 
+### ESPHome camera
+
+With esphome we can use the ultimate power of `curl` command to fetch the image
+from the camera :D
+
+- install esphome [camera](https://esphome.io/components/esp32_camera.html)
+  on the device and add `esp32_camera` and `esp32_camera_web_server` with
+  `snapshot` modules:
+
+  ```yaml
+  esp32_camera:
+  ... (skipped due to the fact there are different modules)
+
+  esp32_camera_web_server:
+    - port: 8081
+      mode: snapshot
+  ```
+
+- copy `esphome.dist` as `.esphome`
+- in copied file `.esphome` replace `token-change-me` with the value of the token
+  you copied
+- in copied file `.esphome` replace `fingerprint-change-me` with some random value,
+  which is alphanumeric and has at least 16 chars (and max of 40 chars),
+  for example set it to `fingerprint-myprinter3-camera-3`
+- in copied file `.esphome` replace your esphome device address in `CAMERA_COMMAND_EXTRA_PARAMS`
+- save edited file `.esphome`
+
 ## Test the config
 
 - ensure to turn on the 3D Printer so that it sends telemetry, otherwise images
   will not be seen
 - run below commands, we assume `.env` is the camera config we defined earlier
+
+TODO: fix env var export
 
 ```shell
 env $(cat .env | xargs) ./prusa-connect-camera.sh
