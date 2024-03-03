@@ -23,6 +23,7 @@ Linux shell script to send still camera images to Prusa Connect
 - Raspberry Pi CSI cameras such as [Raspberry Pi Cam](https://www.raspberrypi.com/documentation/accessories/camera.html)
 - most of USB cameras if they work under Linux
 - esphome cameras using `esp32_camera_web_server` with `snapshot` module
+- esphome cameras using `esp32_camera_web_server` with `stream` module using `ffmpeg`
 
 ## Requirements
 
@@ -248,21 +249,11 @@ sudo systemctl status prusa-connect-camera@usb1.service
 
 ## Advanced configuration
 
-### Getting higher camera images
+### Getting higher quality camera images
 
-Use v4l2-ctl to get the list of available resolutions that camera provides
+Use `v4l2-ctl` to get the list of available resolutions that camera provides
 and then update it in the env var configs. Test changes.
 Notice that Prusa Connect has file size limit something about 8MB of the image uploaded.
-
-## ffmpeg esphome frame from a stream
-
-Notice, output messages and flags differ depending on the ffmpeg version
-
-ffmpeg 5.x:
-
-```shell
-ffmpeg -y -i "http://esp32-wrover-0461c8.local:8080/" -vframes 1 -q:v 1 -f image2 -update 1 ffpeg-esphome-stream.jpg
-```
 
 ## Performance
 
