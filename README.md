@@ -195,6 +195,61 @@ With esphome we can use the `ffmpeg` to fetch the image from the camera:
 - notice that `-update 1` may not be needed in certain ffmpeg versions
 - save edited file `.esphome-stream`
 
+## RTSP cameras
+
+### Caution
+
+**DO NOT use VLC to test streams**, there are unfortunately problems with it.
+Please use `ffplay` from `ffmpeg` package.
+
+### mediamtx
+
+Assuming you run [mediamtx with Raspberry Pi CSI camera](https://github.com/bluenviron/mediamtx#raspberry-pi-cameras)
+and that `raspberry-pi` is the hostname of your device and that you expose two cams:
+
+- CSI Rasberry Pi camera
+- USB camera
+
+so your `mediamtx.yml` has config fragment such as:
+
+```yaml
+paths:
+  cam:
+    source: rpiCamera
+
+  endoscope:
+    runOnInit: ffmpeg -f v4l2 -i /dev/video1 -pix_fmt yuv420p -preset ultrafast -b:v 600k -f rtsp rtsp://localhost:$RTSP_PORT/$MTX_PATH
+    runOnInitRestart: yes
+
+```
+
+You have some options such as TCP or UDP stream (whatever..).
+This should work with any other camera (usually there is a different port)
+
+You should be able to test the stream locally with `ffplay` command.
+For example, if you use mediamtx config above then:
+
+```shell
+ffplay rtsp://raspberry-pi:8554/cam
+ffplay rtsp://raspberry-pi:8554/endoscope
+```
+
+should show window with the image stream for each device.
+
+If that works, then configuration should be pretty straightforward:
+
+- copy `ffmpeg-mediamtx-rtsp-tcp.dist` as `.ffmpeg-mediamtx-rtsp-tcp`
+- in copied file `.ffmpeg-mediamtx-rtsp-tcp` replace `token-change-me` with the value
+  of the token you copied
+- in copied file `.ffmpeg-mediamtx-rtsp-tcp` replace `fingerprint-change-me`
+  with some random value, which is alphanumeric and has at least 16 chars
+  (and max of 40 chars), for example set it to `fingerprint-myprinter4-camera-4`
+- in copied file `.ffmpeg-mediamtx-rtsp-tcp` replace your RTSP device address `raspberry-pi`,
+  port and stream identificator in `CAMERA_COMMAND_EXTRA_PARAMS` if needed
+- save edited file `.ffmpeg-mediamtx-rtsp-tcp`
+
+You can try with UDP, but you may not get it ;-)
+
 ## Test the config
 
 - ensure to turn on the 3D Printer so that it sends telemetry, otherwise images

@@ -1,0 +1,7 @@
+PRINTER_ADDRESS=127.0.0.1
+PRUSA_CONNECT_CAMERA_TOKEN=token-change-me
+PRUSA_CONNECT_CAMERA_FINGERPRINT=fingerprint-change-me
+CAMERA_DEVICE=/dev/null
+CAMERA_COMMAND=ffmpeg
+CAMERA_COMMAND_EXTRA_PARAMS="-loglevel error -y -rtsp_transport udp -i "rtsp://raspberry-pi:8554/cam" -f image2 -vframes 1 -pix_fmt yuvj420p "
+
