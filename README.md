@@ -1,5 +1,7 @@
 # prusa-connect-camera-script
 
+![prusa-connect-cam](./prusa-connect-cam.png)
+
 Linux shell script to send still camera images to Prusa Connect
 
 ## Known limitations
@@ -280,3 +282,7 @@ you should be able to add `--resolution 1280x960` to the CAMERA_COMMAND_EXTRA_PA
   but it has load average about 1.4, and CPU is quite well utilized, so you may
   need to decrease resolution per camera to see how it goes.
 - ffdshow is usually noticeably slow and cpu intensive.
+
+## Todo other
+
+- TODO: add fake prusaconnect POST messages to keep printer 'always on'?
