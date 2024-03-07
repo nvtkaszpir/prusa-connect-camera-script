@@ -7,7 +7,7 @@ Host or virtual machine or container:
 - probably something like Raspberry Pi Zero W at least, can be without camera
 - more cameras usually requires more compute power
 
- Camera such as:
+Camera such as:
 <!-- markdown-link-check-disable -->
 - Raspberry Pi CSI cameras such as [Raspberry Pi Cam](https://www.raspberrypi.com/documentation/accessories/camera.html)
 <!-- markdown-link-check-enable -->
@@ -30,7 +30,8 @@ Operating system, Debian based preferred, for example Raspberry Pi OS Lite.
 ## Optional packages
 
 - `v4l-utils` - to detect camera capabilities
-- `libraspberrypi-bin` or `rpicam-apps-lite` for Rpi CSI cameras (should be already installed on Rpi OS)
+- `libraspberrypi-bin` or `rpicam-apps-lite` for Rpi CSI cameras
+  (should be already installed on Rpi OS)
 - `fswebcam` - for generic USB cameras
 - `ffmpeg` - for custom commands for capturing remote streams
 - you-name-it - for custom commands beyond my imagination
