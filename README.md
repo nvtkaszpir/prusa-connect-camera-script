@@ -1,6 +1,6 @@
 # prusa-connect-camera-script
 
-![prusa-connect-cam](./prusa-connect-cam.png)
+![prusa-connect-cam](docs/static/prusa-connect-cam.png)
 
 Linux shell script to send still camera images to Prusa Connect
 
