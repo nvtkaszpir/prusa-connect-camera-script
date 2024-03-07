@@ -153,32 +153,36 @@ while true; do
     fi
   fi
 
+  # clean up any old image to avoid some weird issues
+  rm -f "${TARGET_DIR}/camera_${camera_id}.jpg"
   # perform image capture, write to /dev/shm to avoid killing slowly microSD card with writes
   eval "${command_capture}" ${CAMERA_COMMAND_EXTRA_PARAMS} "${TARGET_DIR}/camera_${camera_id}.jpg" \
     >"${TARGET_DIR}/camera_${camera_id}.stdout" \
     2>"${TARGET_DIR}/camera_${camera_id}.stderr"
-  result=$?
-  if [[ ${result} -eq 0 ]]; then
-    # get captured image size, this is required by PrusaConnect API
-    image_size=$(stat --printf="%s"  "${TARGET_DIR}/camera_${camera_id}.jpg")
-    # push image to PrusaConnect, print return code, it should be 204 if all is ok, if not then you will see error message
-    curl -X PUT "${PRUSA_CONNECT_URL}" \
-      -H "Accept: text/plain" \
-      -H "Content-type: image/jpg" \
-      -H "Fingerprint: ${PRUSA_CONNECT_CAMERA_FINGERPRINT}" \
-      -H "Token: ${PRUSA_CONNECT_CAMERA_TOKEN}" \
-      -H "Content-length: ${image_size}" \
-      --data-binary "@${TARGET_DIR}/camera_${camera_id}.jpg" \
-      --no-progress-meter \
-      --compressed \
-      -w "%{http_code}\n" \
-      ${CURL_EXTRA_PARAMS}
-  else
-    # oh noes!
-    echo "camera image capture command encountered an error, for more details see:"
-    echo "${TARGET_DIR}/camera_${camera_id}.stdout"
-    echo "${TARGET_DIR}/camera_${camera_id}.stderr"
+
+  if ! [[ -r "${TARGET_DIR}/camera_${camera_id}.jpg" ]]; then
+    echo "ERROR: Image not caputed!"
+    cat "${TARGET_DIR}/camera_${camera_id}.stdout"
+    cat "${TARGET_DIR}/camera_${camera_id}.stderr"
+    echo "Please analyze above output and fix it. Aborting loop."
+    exit 1
   fi
+
+  # get captured image size, this is required by PrusaConnect API
+  image_size=$(stat --printf="%s"  "${TARGET_DIR}/camera_${camera_id}.jpg")
+
+  # push image to PrusaConnect, print return code, it should be 204 if all is ok, if not then you will see error message
+  curl -X PUT "${PRUSA_CONNECT_URL}" \
+    -H "Accept: text/plain" \
+    -H "Content-type: image/jpg" \
+    -H "Fingerprint: ${PRUSA_CONNECT_CAMERA_FINGERPRINT}" \
+    -H "Token: ${PRUSA_CONNECT_CAMERA_TOKEN}" \
+    -H "Content-length: ${image_size}" \
+    --data-binary "@${TARGET_DIR}/camera_${camera_id}.jpg" \
+    --no-progress-meter \
+    --compressed \
+    -w "%{http_code}\n" \
+    ${CURL_EXTRA_PARAMS}
 
   sleep "${SLEEP}"
 done

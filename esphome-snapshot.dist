@@ -3,4 +3,4 @@ PRUSA_CONNECT_CAMERA_TOKEN=token-change-me
 PRUSA_CONNECT_CAMERA_FINGERPRINT=fingerprint-change-me
 CAMERA_DEVICE=/dev/null
 CAMERA_COMMAND=curl
-CAMERA_COMMAND_EXTRA_PARAMS='http://esp32-wrover-0461c8.local:8081/ -o '
+CAMERA_COMMAND_EXTRA_PARAMS="--max-time 5 'http://esp32-wrover-0461c8.local:8081/' -o "

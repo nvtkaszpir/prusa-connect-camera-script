@@ -1,0 +1,43 @@
+---
+# This file configures https://pre-commit.com/
+# to use specific hooks and options.
+
+fail_fast: false
+
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.5.0  # Use the ref you want to point at
+  hooks:
+  - id: check-executables-have-shebangs
+  - id: check-merge-conflict
+  - id: check-shebang-scripts-are-executable
+  - id: check-symlinks
+  - id: end-of-file-fixer
+  - id: trailing-whitespace
+
+- repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+  rev: '2.7.3'  # pick a git hash / tag to point to
+  hooks:
+  - id: editorconfig-checker
+    alias: ec
+
+- repo: https://github.com/igorshubovych/markdownlint-cli
+  rev: v0.38.0
+  hooks:
+  - id: markdownlint
+
+- repo: https://github.com/jumanjihouse/pre-commit-hooks
+  rev: 3.0.0  # or specific git tag
+  hooks:
+  - id: git-check
+
+- repo: local
+  hooks:
+  - id: markdown-link-check
+    name: Markdown Link Check
+    description: Extracts links from markdown texts and checks they're all alive (i.e. return status 200 OK).
+    entry: markdown-link-check
+    args: [ "--config", "markdown_link_check_config.json"]
+    language: node
+    types: [markdown]
+    stages: [commit, push, manual]

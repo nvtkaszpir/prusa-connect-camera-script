@@ -4,4 +4,3 @@ PRUSA_CONNECT_CAMERA_FINGERPRINT=fingerprint-change-me
 CAMERA_DEVICE=/dev/video0
 CAMERA_COMMAND=fswebcam
 CAMERA_COMMAND_EXTRA_PARAMS="--resolution 640x480 --no-banner"
-

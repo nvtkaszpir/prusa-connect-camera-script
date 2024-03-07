@@ -1,0 +1,13 @@
+{
+    "httpHeaders": [
+        {
+            "urls": [
+                "https://docs.github.com/",
+                "https://www.raspberrypi.com"
+            ],
+            "headers": {
+                "Accept-Encoding": "br, gzip, deflate"
+            }
+        }
+    ]
+}

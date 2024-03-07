@@ -1,0 +1,57 @@
+---
+site_name: "Prusa Connect Camera Script"
+site_url: "https://nvtkaszpir.github.io/prusa-connect-camera-script"
+repo_url: "https://github.com/nvtkaszpir/prusa-connect-camera-script"
+
+theme: readthedocs
+extra_css:
+  - css/extra.css
+
+plugins:
+  - search
+  - mermaid2
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      preserve_tabs: true
+      custom_fences:
+        # Mermaid diagrams
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_div_format
+
+nav:
+  - About: index.md
+
+  - Preparation:
+    - Requirements: requirements.md
+    - Installation: installation.md
+    - Configuration Overview: configuration.overview.md
+  - Prusa Connect:
+    - Add camera to Prusa Connect: prusa.connect.md
+
+  - Camera configs:
+    - General overview: config.for.camera.md
+    - CSI: config.for.camera.csi.libcamera.md
+    - CSI (legacy): config.for.camera.csi.legacy.md
+    - ESPHome Snapshot: config.for.camera.esphome.snapshot.md
+    - ESPHome Stream: config.for.camera.esphome.stream.md
+    - RTSP streams: config.for.camera.rtsp.md
+    - USB: config.for.camera.usb.md
+
+  - Test:
+    - Test Config: test.config.md
+  - Service:
+    - Systemd: service.systemd.md
+
+  - Advanced:
+    - Configuration Tuning: configuration.tuning.md
+    - Performance: performance.md
+    - Streaming cameras with mediamtx: stream.mediamtx.md
+
