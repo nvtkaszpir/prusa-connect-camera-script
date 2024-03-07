@@ -154,7 +154,7 @@ while true; do
   fi
 
   # perform image capture, write to /dev/shm to avoid killing slowly microSD card with writes
-  eval "${command_capture}" "${CAMERA_COMMAND_EXTRA_PARAMS}" "${TARGET_DIR}/camera_${camera_id}.jpg" \
+  eval "${command_capture}" ${CAMERA_COMMAND_EXTRA_PARAMS} "${TARGET_DIR}/camera_${camera_id}.jpg" \
     >"${TARGET_DIR}/camera_${camera_id}.stdout" \
     2>"${TARGET_DIR}/camera_${camera_id}.stderr"
   result=$?

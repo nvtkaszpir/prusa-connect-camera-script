@@ -29,7 +29,9 @@ Linux shell script to send still camera images to Prusa Connect
 
 ## Requirements
 
-- depending on the device you may need to enable camera in the `raspi-config`
+- (Raspberry Pi) depending on the device you may need to enable camera in the `raspi-config`,
+  aslo I recommend some modern operating system (for example standard
+  Raspberry Pi OS Lite)
 - for USB cameras please install `fswebcam` package
 - generic system packages:
   - `bash` 5.x (what year is it?)
@@ -60,6 +62,15 @@ sequenceDiagram
 ```
 
 ## Installation
+
+Install system packages (assuming Debian based distros on Raspbery Pi OS):
+
+```shell
+sudo apt-get update
+sudo apt-get install -y curl fswebcam
+```
+
+Download this script and prepare service.
 
 ```shell
 ssh pi@your-device
@@ -121,6 +132,11 @@ listed from command above, notice not every device is an actual camera.
 
 ### CSI camera on Raspberry Pi
 
+Depending on the operating system you have you need to choose between
+`csi.dist` (libcamera or rpicam-still) or `csi-legacy.dist` (raspistill).
+
+Example for newer operating systems (libcamera or rpicam-still):
+
 - copy `csi.dist` as `.csi` if you want to use Raspberry Pi camera
 - in copied file `.csi` replace `token-change-me` with the value of the token
   you copied
@@ -128,6 +144,18 @@ listed from command above, notice not every device is an actual camera.
   which is alphanumeric and has at least 16 chars (and max of 40 chars),
   for example set it to `fingerprint-myprinter-camera-1`
 - save edited file `.csi`
+- go to [Test the config](#test-the-config)
+
+Example for older operating systems with raspistill:
+
+- copy `csi-legacy.dist` as `.csi` if you want to use Raspberry Pi camera
+- in copied file `.csi` replace `token-change-me` with the value of the token
+  you copied
+- in copied file `.csi` replace `fingerprint-change-me` with some random value,
+  which is alphanumeric and has at least 16 chars (and max of 40 chars),
+  for example set it to `fingerprint-myprinter-camera-1`
+- save edited file `.csi`
+- go to [Test the config](#test-the-config)
 
 ### USB camera
 
@@ -138,6 +166,7 @@ listed from command above, notice not every device is an actual camera.
   which is alphanumeric and has at least 16 chars (and max of 40 chars),
   for example set it to `fingerprint-myprinter2-camera-2`
 - save edited file `.usb`
+- go to [Test the config](#test-the-config)
 
 ### ESPHome camera snapshot
 
@@ -166,6 +195,7 @@ from the camera :D
 - in copied file `.esphome-snapshot` replace your esphome device address and port
   in `CAMERA_COMMAND_EXTRA_PARAMS`
 - save edited file `.esphome-snapshot`
+- go to [Test the config](#test-the-config)
 
 ### ESPHome camera stream
 
@@ -194,6 +224,7 @@ With esphome we can use the `ffmpeg` to fetch the image from the camera:
   in `CAMERA_COMMAND_EXTRA_PARAMS`
 - notice that `-update 1` may not be needed in certain ffmpeg versions
 - save edited file `.esphome-stream`
+- go to [Test the config](#test-the-config)
 
 ## RTSP cameras
 
@@ -247,19 +278,22 @@ If that works, then configuration should be pretty straightforward:
 - in copied file `.ffmpeg-mediamtx-rtsp-tcp` replace your RTSP device address `raspberry-pi`,
   port and stream identificator in `CAMERA_COMMAND_EXTRA_PARAMS` if needed
 - save edited file `.ffmpeg-mediamtx-rtsp-tcp`
+- go to [Test the config](#test-the-config)
 
 You can try with UDP, but you may not get it ;-)
 
 ## Test the config
 
 - ensure to turn on the 3D Printer so that it sends telemetry, otherwise images
-  will not be seen
+  will sent and you will get successful image uploads but on PrusaConnect page
+  they will not be available
 - run below commands, we assume `.env` is the camera config we defined earlier
 
 TODO: fix env var export
 
 ```shell
-env $(cat .env | xargs) ./prusa-connect-camera.sh
+set -o allexport; source .env; set +o allexport
+./prusa-connect-camera.sh
 ```
 
 Check for errors, if any, if everything is ok you should see a lot of `204`
