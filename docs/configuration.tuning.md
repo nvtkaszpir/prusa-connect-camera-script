@@ -78,7 +78,12 @@ CAMERA_COMMAND_EXTRA_PARAMS="--flip v --resolution 640x480 --no-banner"
 
 ## ffdshow
 
-With ffdshow you can things with filters, it will just require more computing power.
+When curl is not enough and you don't really want to physically turn your camera,
+then use ffdshow.
+You can process static images with it, load v4l2 devices... whatever.
+
+With ffdshow you can do interesting things with filters, it will just require
+more computing power.
 
 See [here](https://superuser.com/questions/578321/how-can-i-rotate-a-video-180-with-ffmpeg)
 for basic ones.
@@ -87,7 +92,7 @@ You probably want to use `-vf "transpose=1"` to rotate image 90 degrees clockwis
 <!-- markdownlint-disable line_length -->
 ```shell
 CAMERA_COMMAND=ffmpeg
-CAMERA_COMMAND_EXTRA_PARAMS="-y -i 'http://esp32-wrover-0461c8.local:8080/' -vf "transpose=1" -vframes 1 -q:v 1 -f image2 -update 1 "
+CAMERA_COMMAND_EXTRA_PARAMS="-y -i 'http://esp32-wrover-0461c8.local:8080/' -vf 'transpose=1' -vframes 1 -q:v 1 -f image2 -update 1 "
 ```
 <!-- markdownlint-disable line_length -->
 
