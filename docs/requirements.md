@@ -2,7 +2,7 @@
 
 ## Hardware
 
-Host or virtual machine or container:
+Physical host or virtual machine or container:
 
 - probably something like Raspberry Pi Zero W at least, can be without camera
 - more cameras usually requires more compute power
@@ -17,7 +17,12 @@ Camera such as:
 
 ## Software
 
-Operating system, Debian based preferred, for example Raspberry Pi OS Lite.
+Linux operating system.
+Debian based preferred, for example Raspberry Pi OS Lite if you run Raspberry Pi.
+I use also laptop with Ubuntu 22.04, but I believe with minor tweaks it should
+work on most distributions (mainly package names are different).
+
+Below list uses Debian package names.
 
 ## Generic system packages
 
