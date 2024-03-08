@@ -5,6 +5,18 @@
 This project aims to make it easier to use any camera to be used as
 Prusa Connect camera.
 
+## Features
+
+- allows to read images from CSI cameras, USB cameras, RTSP streams, still images...
+- do not send pictures if the printer is offline
+- store data in memory to prevent MicroSD wear out
+- verbose error messages to see if the image capture works
+- ability to run multiple cameras in separate instances
+
+## Planned
+
+- run in container
+
 ## Architecture
 
 ```mermaid
@@ -25,8 +37,6 @@ sequenceDiagram
 
 ## Known limitations
 
-- TODO: camera pre-configuration is not yet supported
-  (such as fixed white balance etc)
 - this script performs processing of the single camera, if you need more cameras
   then just create multiple copies with different settings (see below)
 - Rpi Zero W or older devices may have CPU limitations to process remote streams

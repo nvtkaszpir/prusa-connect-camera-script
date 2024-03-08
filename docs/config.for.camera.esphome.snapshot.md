@@ -35,3 +35,19 @@ Flash the device and wait until it boots and is available.
 - save edited file `.env`
 
 Next, [test config](./test.config.md).
+
+## Real world example
+
+I have esp32-wrover-dev board with camera + esphome + web ui for camera exposing
+snapshot frame on port `8081`.
+
+We can use curl to fetch it.
+
+```shell
+PRINTER_ADDRESS=127.0.0.1
+PRUSA_CONNECT_CAMERA_TOKEN=redacted
+PRUSA_CONNECT_CAMERA_FINGERPRINT=06f47777-f179-4025-bd80-9e4cb8db2aed
+CAMERA_DEVICE=/dev/null
+CAMERA_COMMAND=curl
+CAMERA_COMMAND_EXTRA_PARAMS=http://esp32-wrover-0461c8.local:8081/ -o
+```

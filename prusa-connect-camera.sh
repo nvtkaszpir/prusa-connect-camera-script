@@ -19,6 +19,17 @@
 # camera device to use, if you use camera attached to the CSI via camera ribbon then leave as is
 : "${CAMERA_DEVICE:=/dev/video0}"
 
+# camera setup command and params
+# executed before taking image
+# defualt is empty, because some cameras do not support it
+# in general you want to use something like v4l2-ctl
+# <setup_command>
+# so for example:
+# setup_command=v4l2-ctl --set-ctrl brightness=10,gamma=120 -d $CAMERA_DEVICE
+# will translate to:
+#   v4l2-ctl --set-ctrl brightness=10,gamma=120 -d /dev/video0
+: "${CAMERA_SETUP_COMMAND:=}"
+
 # avaliable options:
 # rpicam-still - using CSI camera + modern Rasberry Pi operating systems since Debian 11 Bullseye
 # raspistill - using CSI camera + older Raspberyy Pi operating systems
@@ -135,6 +146,13 @@ fi
 if [[ -z "${command_capture}" ]]; then
   echo "ERROR: Could not detect image capture method, aborting"
   exit 1
+fi
+
+CAMERA_SETUP_COMMAND
+if [[ -n "${CAMERA_SETUP_COMMAND}" ]]; then
+  echo "INFO: Running CAMERA_SETUP_COMMAND command"
+  echo "${CAMERA_SETUP_COMMAND}"
+  eval ${CAMERA_SETUP_COMMAND}
 fi
 
 echo "Camera capture command: ${command_capture} ${CAMERA_COMMAND_EXTRA_PARAMS} ${TARGET_DIR}/camera_${camera_id}.jpg"

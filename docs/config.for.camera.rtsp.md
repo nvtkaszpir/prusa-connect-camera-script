@@ -33,3 +33,43 @@ If that works, then configuration should be pretty straightforward:
 You can try with `UDP`, but you may not get it ;-)
 
 Next, [test config](./test.config.md).
+
+## Real world example
+
+My another Rpi Zero W named `hormex` has two cameras:
+
+- CSI
+- endoscope on /dev/video
+
+and I'm running `mediamtx` server to conver those to RTSP streams.
+More about mediamtx is [here](./stream.mediamtx.md).
+
+So I can have two configs:
+
+`.stream-csi` over UDP:
+
+<!-- markdownlint-disable line_length -->
+
+```shell
+PRINTER_ADDRESS=127.0.0.1
+PRUSA_CONNECT_CAMERA_TOKEN=redacted
+PRUSA_CONNECT_CAMERA_FINGERPRINT=62e8ab72-9766-4ad5-b8b1-174d389fc0d3
+CAMERA_DEVICE=/dev/null
+CAMERA_COMMAND=ffmpeg
+CAMERA_COMMAND_EXTRA_PARAMS="-loglevel error -y -rtsp_transport udp -i "rtsp://hormex:8554/cam" -f image2 -vframes 1 -pix_fmt yuvj420p "
+```
+<!-- markdownlint-enable line_length -->
+
+`.stream-endo` over TCP:
+
+<!-- markdownlint-disable line_length -->
+```shell
+PRINTER_ADDRESS=127.0.0.1
+PRUSA_CONNECT_CAMERA_TOKEN=redacted
+PRUSA_CONNECT_CAMERA_FINGERPRINT=01a67af8-86a3-45c7-b6e2-39e9d086b367
+CAMERA_DEVICE=/dev/null
+CAMERA_COMMAND=ffmpeg
+CAMERA_COMMAND_EXTRA_PARAMS="-loglevel error -y -rtsp_transport tcp -i "rtsp://hormex:8554/endoscope" -f image2 -vframes 1 -pix_fmt yuvj420p "
+
+```
+<!-- markdownlint-enable line_length -->

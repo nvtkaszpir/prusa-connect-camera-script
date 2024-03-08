@@ -1,6 +1,7 @@
 # mediamtx
 
-Use mediamtx on antoher Raspberry Pi to create RTSP camera stream for test.
+Use [mediamtx](https://github.com/bluenviron/mediamtx) on another Raspberry Pi
+to create RTSP camera stream for test.
 
 Assuming you run [mediamtx with Raspberry Pi CSI camera](https://github.com/bluenviron/mediamtx#raspberry-pi-cameras)
 and that `raspberry-pi` is the hostname of your device and that you expose two cams:
@@ -32,7 +33,7 @@ Start mediamtx server:
 ```
 
 This should allow us to reach two streams, replace `rpi-address` with the name
-of your Raspberry Pi hostname or IP address
+of your Raspberry Pi hostname or IP address. The ports are default for mediamtx.
 
 ```shell
 ffplay rtsp://rpi-address:8554/cam

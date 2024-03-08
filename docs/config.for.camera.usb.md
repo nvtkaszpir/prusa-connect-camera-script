@@ -25,3 +25,18 @@ Notice not every device is an actual camera.
 - save edited file `.env`
 
 Next, [test config](./test.config.md).
+
+## Real world example
+
+Raspberry Pi Zero W with endoscope camera over USB, registered as `/dev/video1`:
+
+<!-- markdownlint-disable line_length -->
+```shell
+PRINTER_ADDRESS=192.168.1.25
+PRUSA_CONNECT_CAMERA_TOKEN=redacted
+PRUSA_CONNECT_CAMERA_FINGERPRINT=7054ba85-bc19-4eb9-badc-6129575d9651
+CAMERA_DEVICE=/dev/video1
+CAMERA_COMMAND=fswebcam
+CAMERA_COMMAND_EXTRA_PARAMS="--resolution 1280x960 --no-banner"
+```
+<!-- markdownlint-enable line_length -->

@@ -22,6 +22,21 @@ set -o allexport; source .env; set +o allexport
 
 ```
 
+Any linux host with ffmpeg and RTSP camera:
+
+```shell
+# go to Prusa Connect site, add camera, copy token, turn on your 3D printer
+
+cp ffmpeg-mediamtx-rtsp-tcp.dist .env
+# edit .env file, set token and fingerprint
+# change 'rtsp://raspberry-pi:8554/cam' to rtsp://<username>:<password>@<camera-ip-address>/<stream-name>
+
+set -o allexport; source .env; set +o allexport
+
+./prusa-connect-camera.sh
+
+```
+
 ## Docs
 
 ```shell

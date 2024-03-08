@@ -11,3 +11,16 @@ Example for older operating systems with (command `raspistill`):
 - save edited file `.env`
 
 Next, [test config](./test.config.md).
+
+## Real world scenario
+
+Some older RPI 3 with older Debian with basic cam:
+
+```shell
+PRINTER_ADDRESS=127.0.0.1
+PRUSA_CONNECT_CAMERA_TOKEN=token-change-me
+PRUSA_CONNECT_CAMERA_FINGERPRINT=trash-cam-night-video-wide-1
+CAMERA_DEVICE=/dev/video0
+CAMERA_COMMAND=raspistill
+CAMERA_COMMAND_EXTRA_PARAMS="--nopreview --mode 640:480 -o"
+```
