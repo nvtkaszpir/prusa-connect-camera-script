@@ -28,7 +28,7 @@ start the service and show current status.
 ## Configure multiple cameras
 
 This project allows spawning multiple systemd units.
-The suffix after `@` defines what env file to load from givven path.
+The suffix after `@` defines what env file to load from given path.
 For example if you set unit file name to `prusa-connect-camera@csi.service`
 then systemd will load env vars from the file under path
 `/home/pi/src/prusa-connect-camera-script/.csi`

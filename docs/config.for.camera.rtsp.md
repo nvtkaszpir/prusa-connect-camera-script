@@ -27,7 +27,7 @@ If that works, then configuration should be pretty straightforward:
   with some random value, which is alphanumeric and has at least 16 chars
   (and max of 40 chars), for example set it to `fingerprint-myprinter4-camera-4`
 - in copied file `.env` replace your RTSP device address `raspberry-pi`,
-  port and stream identificator in `CAMERA_COMMAND_EXTRA_PARAMS` if needed
+  port and stream id in `CAMERA_COMMAND_EXTRA_PARAMS` if needed
 - save edited file `.env`
 
 You can try with `UDP`, but you may not get it ;-)

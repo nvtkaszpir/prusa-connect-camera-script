@@ -32,7 +32,7 @@
 
 # avaliable options:
 # rpicam-still - using CSI camera + modern Rasberry Pi operating systems since Debian 11 Bullseye
-# raspistill - using CSI camera + older Raspberyy Pi operating systems
+# raspistill - using CSI camera + older Raspberry Pi operating systems
 # fswebcam - using USB camera + custom package 'fswebcam'
 # anything else will be processed directly, so for example you could use 'ffmpeg' in here
 : "${CAMERA_COMMAND:=rpicam-still}"

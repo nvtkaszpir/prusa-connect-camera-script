@@ -1,6 +1,6 @@
 # Installation
 
-Install system packages - assuming Debian based distros on Raspbery Pi OS, which
+Install system packages - assuming Debian based distros on Raspberry Pi OS, which
 also come in with some pre-installed packages.
 
 Below commands should be executed in shell/terminal (on the Raspberry Pi).

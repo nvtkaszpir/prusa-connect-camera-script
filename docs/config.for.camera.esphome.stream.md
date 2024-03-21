@@ -4,7 +4,7 @@ With esphome camera stream we can use the `ffmpeg` to fetch the image from the
 camera stream. It requires a bit more computing power from esp device and the
 host that runs the image processing.
 
-Notice that this is not recommended way due to the amout of consumed resources.
+Notice that this is not recommended way due to the amount of consumed resources.
 
 ## Prepare esphome device
 

@@ -1,6 +1,6 @@
 # CSI camera on Raspberry Pi (legacy)
 
-Example for older operating systems with (command `raspistill`):
+Example for older operating systems (those with command `raspistill`):
 
 - copy `csi-legacy.dist` as `.env` if you want to use Raspberry Pi camera
 - in copied file `.env` replace `token-change-me` with the value of the token
@@ -14,7 +14,7 @@ Next, [test config](./test.config.md).
 
 ## Real world scenario
 
-Some older RPI 3 with older Debian with basic cam:
+Some older Rpi 3 with older Debian with basic cam:
 
 ```shell
 PRINTER_ADDRESS=127.0.0.1
