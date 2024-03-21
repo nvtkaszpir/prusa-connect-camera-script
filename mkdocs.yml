@@ -3,13 +3,26 @@ site_name: "Prusa Connect Camera Script"
 site_url: "https://nvtkaszpir.github.io/prusa-connect-camera-script"
 repo_url: "https://github.com/nvtkaszpir/prusa-connect-camera-script"
 
-theme: readthedocs
+theme:
+  name: material
+  features:
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - search.share
+  palette:
+    primary: black
+  logo: static/prusa-connect-cam.png
+
 extra_css:
   - css/extra.css
 
 plugins:
+  - git-revision-date-localized:
   - search
   - mermaid2
+  - tags
 
 markdown_extensions:
   - pymdownx.highlight:

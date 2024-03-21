@@ -7,13 +7,16 @@ Fingerprint can be easily generated using command:
 ```shell
 uuidgen
 ```
+
 just copy/paste the output as fingerprint value into the config.
+
+## Note
 
 **Do not** change fingerprint after launching the script - thus camera is registered
 and you may need to revert the change or delete and readd camera again and start
 from scratch.
 
-Example devices:
+## Example devices
 
 - [Raspberry Pi CSI camera](./config.for.camera.csi.libcamera.md) - libcamera (recommended)
 - [Raspberry Pi CSI camera](./config.for.camera.csi.legacy.md) - legacy
