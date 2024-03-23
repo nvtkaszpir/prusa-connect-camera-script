@@ -20,6 +20,9 @@ extra_css:
 
 plugins:
   - git-revision-date-localized:
+      type: custom
+      custom_format: "%Y-%m-%d %H:%M:%S %z (UTC)"
+      timezone: Europe/Warsaw
   - search
   - mermaid2
   - tags
