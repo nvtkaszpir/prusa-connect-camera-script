@@ -19,7 +19,8 @@ Next, [test config](./test.config.md).
 
 ## Real example
 
-My Rpi Zero W with Raspberry Pi Camera v2 with maximum resolution available
+My Rpi Zero W with Raspberry Pi Camera v2 with
+[maximum resolution](./configuration.tuning.md) available:
 
 <!-- markdownlint-disable line_length -->
 ```shell

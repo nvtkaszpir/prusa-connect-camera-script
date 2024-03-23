@@ -8,12 +8,21 @@ This should work on any linux distro with any sane camera that you have.
 
 Run `v4l2-ctl --list-devices`.
 
+This should show list of devices to use,  where `/dev/video0` is a device
+name.
+
+Notice that not every device is an actual camera.
+
 ## How to get what modes are available for the camera?
 
-Run `v4l2-ctl --list-formats-ext -d /dev/video0` where `/dev/video0` is a device
-listed from command above.
+The quick all-in one output for camera `/dev/video0` is
 
-Notice not every device is an actual camera.
+```shell
+v4l2-ctl -d /dev/video0 --all
+```
+
+For more details about formats it is better to use
+`v4l2-ctl --list-formats-ext -d /dev/video0`
 
 ## Prepare config
 
