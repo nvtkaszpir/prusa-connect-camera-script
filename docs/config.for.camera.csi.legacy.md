@@ -1,5 +1,10 @@
 # CSI camera on Raspberry Pi (legacy)
 
+![CSI Camera V2](./static/pi-camera.jpg)
+
+[CSI Camera V2](https://www.raspberrypi.com/products/camera-module-v2/)
+as of Sat 23 Mar 08:47:12 UTC 2024.
+
 Example for older operating systems (those with command `raspistill`):
 
 - copy `csi-legacy.dist` as `.env` if you want to use Raspberry Pi camera

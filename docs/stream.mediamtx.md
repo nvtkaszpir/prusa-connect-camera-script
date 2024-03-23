@@ -19,8 +19,9 @@ paths:
     source: rpiCamera
 
   endoscope:
-    runOnInit: ffmpeg -f v4l2 -i /dev/video1 -pix_fmt yuv420p -preset ultrafast -b:v 600k -f rtsp rtsp://localhost:$RTSP_PORT/$MTX_PATH
+    runOnInit: ffmpeg -f v4l2 -i /dev/video1 -pix_fmt yuv420p -c:v libx264 -preset ultrafast -b:v 600k -f rtsp rtsp://localhost:$RTSP_PORT/$MTX_PATH
     runOnInitRestart: yes
+
 
 ```
 
@@ -38,4 +39,11 @@ of your Raspberry Pi hostname or IP address. The ports are default for mediamtx.
 ```shell
 ffplay rtsp://rpi-address:8554/cam
 ffplay rtsp://rpi-address:8554/endoscope
+```
+
+Or you could watch it via web browser under endpoints such as
+
+```text
+http://rpi-address:8889/cam
+http://rpi-address:8889/endoscope
 ```

@@ -1,5 +1,7 @@
 # USB camera
 
+![USB camera](./static/usb_cam.png)
+
 This should work on any linux distro with any sane camera that you have.
 
 ## How to get info which cameras are available?

@@ -1,5 +1,7 @@
 # ESPHome camera snapshot
 
+![esp32-wrover-dev](./static/esp32-camera.jpg)
+
 With esphome camera with snapshot we can use the ultimate power of `curl`
 command to fetch the image from the camera.
 

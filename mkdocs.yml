@@ -51,19 +51,24 @@ nav:
 
   - Camera configs:
     - General overview: config.for.camera.md
-    - CSI: config.for.camera.csi.libcamera.md
+
     - CSI (legacy): config.for.camera.csi.legacy.md
+    - CSI: config.for.camera.csi.libcamera.md
     - ESPHome Snapshot: config.for.camera.esphome.snapshot.md
     - ESPHome Stream: config.for.camera.esphome.stream.md
-    - RTSP streams: config.for.camera.rtsp.md
     - USB: config.for.camera.usb.md
+    - Web Cams - Snapshot: config.for.camera.snapshot.md
+    - Web Cams - MJPG streams: config.for.camera.mjpg.md
+    - Web Cams - RTSP streams: config.for.camera.rtsp.md
 
   - Test:
     - Test Config: test.config.md
   - Service:
     - Systemd: service.systemd.md
 
+  - Configuration Tuning: configuration.tuning.md
+  - Performance: performance.md
+
   - Advanced:
-    - Configuration Tuning: configuration.tuning.md
-    - Performance: performance.md
+
     - Streaming cameras with mediamtx: stream.mediamtx.md

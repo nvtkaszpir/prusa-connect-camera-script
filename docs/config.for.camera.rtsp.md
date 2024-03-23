@@ -1,4 +1,4 @@
-# RTSP cameras
+# Web Cam - RTSP stream
 
 ## Caution
 

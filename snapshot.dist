@@ -1,0 +1,6 @@
+PRINTER_ADDRESS=127.0.0.1
+PRUSA_CONNECT_CAMERA_TOKEN=token-change-me
+PRUSA_CONNECT_CAMERA_FINGERPRINT=fingerprint-change-me
+CAMERA_DEVICE=/dev/null
+CAMERA_COMMAND=curl
+CAMERA_COMMAND_EXTRA_PARAMS="--max-time 5 'http://another-cam.local:8081/snap.jpg' -o "

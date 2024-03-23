@@ -1,5 +1,7 @@
 # ESPHome camera stream
 
+![esp32-wrover-dev](./static/esp32-camera.jpg)
+
 With esphome camera stream we can use the `ffmpeg` to fetch the image from the
 camera stream. It requires a bit more computing power from esp device and the
 host that runs the image processing.

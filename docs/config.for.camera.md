@@ -18,14 +18,25 @@ from scratch.
 
 ## Example devices
 
+### Locally connected
+
 - [Raspberry Pi CSI camera](./config.for.camera.csi.libcamera.md) - libcamera (recommended)
 - [Raspberry Pi CSI camera](./config.for.camera.csi.legacy.md) - legacy
-
 - [USB camera](./config.for.camera.usb.md)
+
+### Web cams
+
+#### Generic
+
+- [Snapshot cams](./config.for.camera.snapshot.md) (recommended)
+- [MJPG streaming cams](./config.for.camera.mjpg.md)
+- [RTSP streaming cams](./config.for.camera.rtsp.md)
+
+#### Specific example
 
 - [ESPHome via camera snapshot](./config.for.camera.esphome.snapshot.md) (recommended)
 - [ESPHome via camera stream](./config.for.camera.esphome.stream.md)
 
-- [RTSP streaming cams](./config.for.camera.rtsp.md)
+## Next
 
 Next, [test config](./test.config.md).

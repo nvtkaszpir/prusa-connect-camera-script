@@ -1,9 +1,15 @@
 {
+    "ignorePatterns": [
+        {
+            "pattern": "^https://www.raspberrypi.com"
+        }
+    ],
     "httpHeaders": [
         {
             "urls": [
                 "https://docs.github.com/",
-                "https://www.raspberrypi.com"
+                "https://www.raspberrypi.com",
+                "https://www.raspberrypi.com/products/camera-module-v2/"
             ],
             "headers": {
                 "Accept-Encoding": "br, gzip, deflate"

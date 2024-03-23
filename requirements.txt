@@ -4,5 +4,6 @@ mkdocs-material-extensions==1.1.1
 mkdocs-material==9.0.2
 mkdocs-mermaid2-plugin==1.1.1
 mkdocs-minify-plugin==0.6.2
+mkdocs-redirects==1.2.1
 mkdocs-with-pdf==0.9.3
 mkdocs==1.5.3
