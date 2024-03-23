@@ -14,6 +14,7 @@ Camera such as:
 - most of USB cameras if they work under Linux
 - esphome cameras using `esp32_camera_web_server` with `snapshot` module
 - esphome cameras using `esp32_camera_web_server` with `stream` module using `ffmpeg`
+- probably any camera if using `ffmpeg`
 
 ## Software
 

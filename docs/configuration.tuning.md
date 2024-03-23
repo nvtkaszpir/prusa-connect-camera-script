@@ -7,8 +7,6 @@ Below steps depend on the camera capabilities, thus your mileage may vary.
 Notice that Prusa Connect has file size limit something about 8MB of the image uploaded,
 so there may be no point in getting images with super high resolutions.
 
-## Getting ge
-
 ## Getting higher quality camera images
 
 Use `v4l2-ctl` to get the list of available resolutions that camera provides
