@@ -36,6 +36,7 @@ Below list uses Debian package names.
 ## Optional packages
 
 - `v4l-utils` - to detect camera capabilities
+- `libcamera0` - for Rpi CSI cameras
 - `libraspberrypi-bin` or `rpicam-apps-lite` for Rpi CSI cameras
   (should be already installed on Rpi OS)
 - `fswebcam` - for generic USB cameras
