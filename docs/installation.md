@@ -9,7 +9,7 @@ For most Raspberry Pi Cameras (CSI/USB):
 
 ```shell
 sudo apt-get update
-sudo apt-get install -y curl fswebcam git iputils-ping v4l-utils uuid-runtime
+sudo apt-get install -y curl libcamera0 fswebcam git iputils-ping v4l-utils uuid-runtime
 ```
 
 Additional packages for remote cameras - especially the one that are used for streaming:
