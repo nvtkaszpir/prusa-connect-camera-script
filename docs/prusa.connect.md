@@ -4,4 +4,5 @@
 - select `Printer`
 - select `Camera`
 - on the bottom click `Add new other camera`
-- new camera is created, copy `Token`, this is needed later
+- new camera is created, copy `Token`, this is needed later as
+  `PRUSA_CONNECT_CAMERA_TOKEN` env var

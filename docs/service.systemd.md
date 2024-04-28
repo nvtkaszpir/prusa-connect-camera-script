@@ -74,3 +74,19 @@ sudo systemctl status prusa-connect-camera@esphome1.service
 ```
 
 I hope you get the idea...
+
+## Uninstall systemd service
+
+Just run two commands per camera (where `csi` is a camera config):
+
+```shell
+sudo systemctl stop prusa-connect-camera@csi.service
+sudo systemctl disable prusa-connect-camera@csi.service
+```
+
+After removing all cameras remove systemd service definition and reload daemon:
+
+```shell
+sudo rm -f /etc/systemd/system/prusa-connect-camera@.service
+sudo systemctl daemon-reload
+```

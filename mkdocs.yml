@@ -48,7 +48,9 @@ nav:
   - Preparation:
     - Requirements: requirements.md
     - Installation: installation.md
-    - Configuration Overview: configuration.overview.md
+  - Configuration:
+    - Overview: configuration.overview.md
+    - Env vars: configuration.env.md
   - Prusa Connect:
     - Add camera to Prusa Connect: prusa.connect.md
 
@@ -67,9 +69,12 @@ nav:
   - Test:
     - Test Config: test.config.md
   - Service:
+    - Overview: service.md
     - Systemd: service.systemd.md
 
   - Configuration Tuning: configuration.tuning.md
+  - Configuration all env vars: configuration.env.full.md
+
   - Performance: performance.md
 
   - Advanced:
