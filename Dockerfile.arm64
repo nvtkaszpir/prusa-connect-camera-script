@@ -8,15 +8,6 @@ ARG GIT_COMMIT
 ARG AUTHORS=kaszpir@gmail.com
 ARG URL=https://nvtkaszpir.github.io/prusa-connect-camera-script
 
-LABEL org.opencontainers.image.base.name="${BASE_IMAGE}"
-LABEL org.opencontainers.image.base.digest="${BASE_DIGEST}"
-LABEL org.opencontainers.image.description="Linux shell script to send still camera images to Prusa Connect"
-LABEL org.opencontainers.image.revision="${GIT_COMMIT}"
-LABEL org.opencontainers.image.source="${GIT_SOURCE}"
-LABEL org.opencontainers.image.url="${URL}"
-LABEL org.opencontainers.image.licenses="Apache-2.0"
-LABEL org.opencontainers.image.authors="${AUTHORS}"
-
 # hadolint ignore=DL3008
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
@@ -52,3 +43,12 @@ CMD [ "/app/prusa-connect-camera.sh" ]
 # we assume we get a picture at least once per minute
 HEALTHCHECK --interval=60s --timeout=3s \
   CMD test $(find /dev/shm/ -mmin -1 | wc -l) -gt 0
+
+LABEL org.opencontainers.image.base.name="${BASE_IMAGE}"
+LABEL org.opencontainers.image.base.digest="${BASE_DIGEST}"
+LABEL org.opencontainers.image.description="Linux shell script to send still camera images to Prusa Connect"
+LABEL org.opencontainers.image.revision="${GIT_COMMIT}"
+LABEL org.opencontainers.image.source="${GIT_SOURCE}"
+LABEL org.opencontainers.image.url="${URL}"
+LABEL org.opencontainers.image.licenses="Apache-2.0"
+LABEL org.opencontainers.image.authors="${AUTHORS}"
