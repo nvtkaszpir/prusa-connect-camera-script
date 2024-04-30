@@ -74,8 +74,6 @@ if [[ "${PRUSA_CONNECT_CAMERA_FINGERPRINT}" = "unset" ]]; then
   exit 1
 fi
 
-camera_id="${PRUSA_CONNECT_CAMERA_FINGERPRINT}"
-
 
 if [[ ! -r "${CAMERA_DEVICE}" ]]; then
   echo "ERROR: Could not read camera device ${CAMERA_DEVICE}"
@@ -148,14 +146,14 @@ if [[ -z "${command_capture}" ]]; then
   exit 1
 fi
 
-CAMERA_SETUP_COMMAND
+# CAMERA_SETUP_COMMAND
 if [[ -n "${CAMERA_SETUP_COMMAND}" ]]; then
   echo "INFO: Running CAMERA_SETUP_COMMAND command"
   echo "${CAMERA_SETUP_COMMAND}"
   eval ${CAMERA_SETUP_COMMAND}
 fi
 
-echo "Camera capture command: ${command_capture} ${CAMERA_COMMAND_EXTRA_PARAMS} ${TARGET_DIR}/camera_${camera_id}.jpg"
+echo "Camera capture command: ${command_capture} ${CAMERA_COMMAND_EXTRA_PARAMS} ${TARGET_DIR}/camera_${PRUSA_CONNECT_CAMERA_FINGERPRINT}.jpg"
 
 
 trap "echo SIGINT received, exiting...; exit 0" INT
@@ -172,22 +170,22 @@ while true; do
   fi
 
   # clean up any old image to avoid some weird issues
-  rm -f "${TARGET_DIR}/camera_${camera_id}.jpg"
+  rm -f "${TARGET_DIR}/camera_${PRUSA_CONNECT_CAMERA_FINGERPRINT}.jpg"
   # perform image capture, write to /dev/shm to avoid killing slowly microSD card with writes
-  eval "${command_capture}" ${CAMERA_COMMAND_EXTRA_PARAMS} "${TARGET_DIR}/camera_${camera_id}.jpg" \
-    >"${TARGET_DIR}/camera_${camera_id}.stdout" \
-    2>"${TARGET_DIR}/camera_${camera_id}.stderr"
+  eval "${command_capture}" ${CAMERA_COMMAND_EXTRA_PARAMS} "${TARGET_DIR}/camera_${PRUSA_CONNECT_CAMERA_FINGERPRINT}.jpg" \
+    >"${TARGET_DIR}/camera_${PRUSA_CONNECT_CAMERA_FINGERPRINT}.stdout" \
+    2>"${TARGET_DIR}/camera_${PRUSA_CONNECT_CAMERA_FINGERPRINT}.stderr"
 
-  if ! [[ -r "${TARGET_DIR}/camera_${camera_id}.jpg" ]]; then
+  if ! [[ -r "${TARGET_DIR}/camera_${PRUSA_CONNECT_CAMERA_FINGERPRINT}.jpg" ]]; then
     echo "ERROR: Image not caputed!"
-    cat "${TARGET_DIR}/camera_${camera_id}.stdout"
-    cat "${TARGET_DIR}/camera_${camera_id}.stderr"
+    cat "${TARGET_DIR}/camera_${PRUSA_CONNECT_CAMERA_FINGERPRINT}.stdout"
+    cat "${TARGET_DIR}/camera_${PRUSA_CONNECT_CAMERA_FINGERPRINT}.stderr"
     echo "Please analyze above output and fix it. Aborting loop."
     exit 1
   fi
 
   # get captured image size, this is required by PrusaConnect API
-  image_size=$(stat --printf="%s"  "${TARGET_DIR}/camera_${camera_id}.jpg")
+  image_size=$(stat --printf="%s"  "${TARGET_DIR}/camera_${PRUSA_CONNECT_CAMERA_FINGERPRINT}.jpg")
 
   # push image to PrusaConnect, print return code, it should be 204 if all is ok, if not then you will see error message
   curl -X PUT "${PRUSA_CONNECT_URL}" \
@@ -196,11 +194,12 @@ while true; do
     -H "Fingerprint: ${PRUSA_CONNECT_CAMERA_FINGERPRINT}" \
     -H "Token: ${PRUSA_CONNECT_CAMERA_TOKEN}" \
     -H "Content-length: ${image_size}" \
-    --data-binary "@${TARGET_DIR}/camera_${camera_id}.jpg" \
+    --data-binary "@${TARGET_DIR}/camera_${PRUSA_CONNECT_CAMERA_FINGERPRINT}.jpg" \
     --no-progress-meter \
     --compressed \
     -w "%{http_code}\n" \
     ${CURL_EXTRA_PARAMS}
-
+  # healchcheck
+  touch ${TARGET_DIR}/health_${PRUSA_CONNECT_CAMERA_FINGERPRINT}.check
   sleep "${SLEEP}"
 done

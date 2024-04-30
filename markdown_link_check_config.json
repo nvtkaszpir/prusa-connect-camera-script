@@ -2,7 +2,11 @@
     "ignorePatterns": [
         {
             "pattern": "^https://www.raspberrypi.com"
+        },
+        {
+            "pattern": "^quay.io/kaszpir/prusa-connect-script"
         }
+
     ],
     "httpHeaders": [
         {

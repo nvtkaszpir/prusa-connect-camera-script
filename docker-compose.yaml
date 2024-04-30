@@ -1,0 +1,50 @@
+---
+version: '3'
+services:
+
+  # Raspberry Pi CSI camera
+  prusa-connect-cam-rpi-csi:
+    image: quay.io/kaszpir/prusa-connect-script:03c4886
+    read_only: true
+    restart: unless-stopped
+    env_file:
+    - .docker-csi
+    devices:
+    - /dev:/dev
+    volumes:
+    - /dev/:/dev/
+    - /run/udev:/run/udev:ro
+    - type: tmpfs
+      target: /dev/shm
+      tmpfs:
+        size: 32MB
+
+  # generic camera available as /dev/video0
+  prusa-connect-cam-usb:
+    image: quay.io/kaszpir/prusa-connect-script:03c4886-amd64
+    read_only: true
+    restart: unless-stopped
+    env_file:
+    - .docker-video0
+    devices:
+    - /dev:/dev
+    volumes:
+    - /dev/:/dev/
+    - /run/udev:/run/udev:ro
+    - type: tmpfs
+      target: /dev/shm
+      tmpfs:
+        size: 32MB
+
+  # esp32 snapshot
+  prusa-connect-cam-rpi-esp-snapshot:
+    image: quay.io/kaszpir/prusa-connect-script:03c4886
+    read_only: true
+    restart: unless-stopped
+    env_file:
+    - .docker-esphome-snapshot
+    volumes:
+    - type: tmpfs
+      target: /dev/shm
+      tmpfs:
+        size: 32MB

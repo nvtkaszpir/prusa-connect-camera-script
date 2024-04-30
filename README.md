@@ -57,3 +57,10 @@ pre-commit install
 git add .
 pre-commit run --all
 ```
+
+## Docker container build
+
+```shell
+make quay
+make quay_multiarch
+```

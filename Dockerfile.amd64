@@ -1,0 +1,53 @@
+ARG BASE_IMAGE=docker.io/library/ubuntu:24.04
+ARG BASE_DIGEST=sha256:28a2b328825ac02db5c29d9356bfba80ba6c4b6ebfcac5a91a4656fa3453775a
+FROM ${BASE_IMAGE}@${BASE_DIGEST}
+
+ARG GIT_SOURCE
+ARG GIT_COMMIT
+ARG AUTHORS=kaszpir@gmail.com
+ARG URL=https://nvtkaszpir.github.io/prusa-connect-camera-script
+
+LABEL org.opencontainers.image.base.name="${BASE_IMAGE}"
+LABEL org.opencontainers.image.base.digest="${BASE_DIGEST}"
+LABEL org.opencontainers.image.description="Linux shell script to send still camera images to Prusa Connect"
+LABEL org.opencontainers.image.revision="${GIT_COMMIT}"
+LABEL org.opencontainers.image.source="${GIT_SOURCE}"
+LABEL org.opencontainers.image.url="${URL}"
+LABEL org.opencontainers.image.licenses="Apache-2.0"
+LABEL org.opencontainers.image.authors="${AUTHORS}"
+
+# hadolint ignore=DL3008
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    curl \
+    ffmpeg \
+    ffmpeg \
+    fswebcam \
+    git \
+    iputils-ping \
+    uuid-runtime \
+    v4l-utils \
+  && apt-get clean \
+  && rm -rf /var/cache/apt
+
+
+WORKDIR /app
+
+RUN groupadd app && \
+useradd -ms /bin/bash app -g nogroup && \
+usermod -a -G video app && \
+chown -R app:video /app
+USER app
+
+COPY LICENSE /app/
+COPY prusa-connect-camera.sh /app/
+# COPY entrypoint.sh /app/
+
+# allow spawning shell
+ENTRYPOINT [ ]
+CMD [ "/app/prusa-connect-camera.sh" ]
+
+# we assume we get a picture at least once per minute
+HEALTHCHECK --interval=60s --timeout=3s \
+  CMD test $(find /dev/shm/ -mmin -1 | wc -l) -gt 0
