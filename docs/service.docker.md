@@ -25,7 +25,7 @@ logout and login again, or reboot Raspberry Pi.
 
 ## Preparation of env files for docker command
 
-Notice - you do not have to do it if you use docker-compose.
+Notice - you may not have to do it if you use docker-compose (I think...).
 
 If you use `docker` command directly you need to edit env files
 and remove quotation marks from the files (this is a [limitation of the Docker](https://github.com/docker/cli/issues/3630))
