@@ -68,6 +68,7 @@ quay_multiarch:  ## create multi-arch manifest and push it
 			quay.io/${QUAY_REPO_USER}/${QUAY_REPO_NAME}:${GIT_COMMIT}-arm64 \
 			quay.io/${QUAY_REPO_USER}/${QUAY_REPO_NAME}:${GIT_COMMIT}-arm-v7 \
 		--amend
+	docker manifest push --purge quay.io/${QUAY_REPO_USER}/${QUAY_REPO_NAME}:latest
 
 quay: ## build images and push to quay.io
 	$(MAKE) quay_amd64 quay_arm64 quay_arm_v7
