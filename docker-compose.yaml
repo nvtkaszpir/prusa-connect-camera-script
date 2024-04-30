@@ -4,7 +4,7 @@ services:
 
   # Raspberry Pi CSI camera
   prusa-connect-cam-rpi-csi:
-    image: quay.io/kaszpir/prusa-connect-script:03c4886
+    image: quay.io/kaszpir/prusa-connect-script
     read_only: true
     restart: unless-stopped
     env_file:
@@ -21,7 +21,7 @@ services:
 
   # generic camera available as /dev/video0
   prusa-connect-cam-usb:
-    image: quay.io/kaszpir/prusa-connect-script:03c4886-amd64
+    image: quay.io/kaszpir/prusa-connect-script
     read_only: true
     restart: unless-stopped
     env_file:
@@ -38,7 +38,7 @@ services:
 
   # esp32 snapshot
   prusa-connect-cam-rpi-esp-snapshot:
-    image: quay.io/kaszpir/prusa-connect-script:03c4886
+    image: quay.io/kaszpir/prusa-connect-script
     read_only: true
     restart: unless-stopped
     env_file:
