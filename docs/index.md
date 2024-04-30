@@ -12,10 +12,7 @@ Prusa Connect camera.
 - store data in memory to prevent MicroSD wear out
 - verbose error messages to see if the image capture works
 - ability to run multiple cameras in separate instances
-
-## Planned
-
-- run in container
+- ability to run in docker containers (multi-platform  multi-arch)
 
 ## Architecture
 
