@@ -32,4 +32,5 @@ and get the outputs from the command, and also it should write an image.
 Check for errors, if any, if everything is ok you should see a lot of `204`
 every 10s.
 
-If not, well, raise an [issue on GitHub](https://github.com/nvtkaszpir/prusa-connect-camera-script/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc).
+If not, see [troubleshooting](./troubleshooting.md), copy logs
+and raise an [issue on GitHub](https://github.com/nvtkaszpir/prusa-connect-camera-script/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc).

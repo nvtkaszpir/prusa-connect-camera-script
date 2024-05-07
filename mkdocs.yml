@@ -68,6 +68,7 @@ nav:
 
   - Test:
     - Test Config: test.config.md
+    - Troubleshooting: troubleshooting.md
   - Service:
     - Overview: service.md
     - Systemd: service.systemd.md
