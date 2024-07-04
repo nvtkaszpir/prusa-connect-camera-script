@@ -6,6 +6,7 @@ After=network.target
 User=pi
 Group=pi
 EnvironmentFile=/home/pi/src/prusa-connect-camera-script/.%i
+ExecStartPre=/bin/sleep 30
 ExecStart=/home/pi/src/prusa-connect-camera-script/prusa-connect-camera.sh
 Restart=on-failure
 
