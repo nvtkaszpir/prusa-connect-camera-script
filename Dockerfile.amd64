@@ -1,5 +1,5 @@
 ARG BASE_IMAGE=docker.io/library/ubuntu:24.04
-ARG BASE_DIGEST=sha256:28a2b328825ac02db5c29d9356bfba80ba6c4b6ebfcac5a91a4656fa3453775a
+ARG BASE_DIGEST=sha256:c920ba4cfca05503764b785c16b76d43c83a6df8d1ab107e7e6610000d94315c
 FROM ${BASE_IMAGE}@${BASE_DIGEST}
 
 ARG GIT_SOURCE
@@ -12,7 +12,6 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
-    ffmpeg \
     ffmpeg \
     fswebcam \
     git \

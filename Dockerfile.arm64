@@ -1,6 +1,7 @@
-# https://github.com/dtcooper/raspberrypi-os-docker/pkgs/container/raspberrypi-os/209357890?tag=bookworm
+# https://github.com/dtcooper/raspberrypi-os-docker/pkgs/container/raspberrypi-os/237003519?tag=bookworm
+
 ARG BASE_IMAGE=ghcr.io/dtcooper/raspberrypi-os:bookworm
-ARG BASE_DIGEST=sha256:8f3b55ddf9460246e2e313e774f024f9fe8d575c954a9905a156267462f98da9
+ARG BASE_DIGEST=sha256:b08a06776ace987d889ef41805711ce3cefcc18bbefad1295774ae395072e61f
 FROM ${BASE_IMAGE}@${BASE_DIGEST}
 
 ARG GIT_SOURCE
@@ -13,7 +14,6 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
-    ffmpeg \
     ffmpeg \
     fswebcam \
     git \
