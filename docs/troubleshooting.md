@@ -4,6 +4,11 @@ Things to check if it does not work.
 
 ## General
 
+- some USB cameras require physical unplung/plug-in AFTER
+  the Rasberry Pi was turned on, there is no fix for this yet, see
+  [raspberrypi/linux/issues/6255](https://github.com/raspberrypi/linux/issues/6255)
+  for such example
+
 - check `/dev/shm/camera_*.stdout` and `/dev/shm/camera_*.stderr`
   files for more details - if they still that 'everything is okay'
   then probably you have issues with permissions when running script

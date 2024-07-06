@@ -1,13 +1,16 @@
 [Unit]
 Description=Prusa Connect Camera Script
-After=network.target
+After=network.target systemd-udev-trigger.service
+Wants=network.target
+Requires=systemd-udev-trigger.service
 
 [Service]
 User=pi
 Group=pi
 EnvironmentFile=/home/pi/src/prusa-connect-camera-script/.%i
 ExecStart=/home/pi/src/prusa-connect-camera-script/prusa-connect-camera.sh
-Restart=on-failure
+Restart=always
+RestartSec=15
 
 [Install]
 WantedBy=multi-user.target

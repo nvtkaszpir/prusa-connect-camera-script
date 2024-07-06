@@ -4,40 +4,23 @@
 
 Linux shell script to send still camera images to Prusa Connect
 
-See [docs here](https://nvtkaszpir.github.io/prusa-connect-camera-script)
+## Documentation
 
-## Quick start
+See [docs here](https://nvtkaszpir.github.io/prusa-connect-camera-script) for:
 
-RaspberryPi with CSI camera with libcamera:
+* feature list
+* requirements
+* general step-by-step install
+* example configs
+* advanced tweaks
 
-```shell
-# go to Prusa Connect site, add camera, copy token, turn on your 3D printer
+## Development
 
-cp csi.dist .env
-# edit .env file, set token and fingerprint
+Those are generally notes to myself :)
 
-set -o allexport; source .env; set +o allexport
+### Docs
 
-./prusa-connect-camera.sh
-
-```
-
-Any linux host with ffmpeg and RTSP camera:
-
-```shell
-# go to Prusa Connect site, add camera, copy token, turn on your 3D printer
-
-cp ffmpeg-mediamtx-rtsp-tcp.dist .env
-# edit .env file, set token and fingerprint
-# change 'rtsp://raspberry-pi:8554/cam' to rtsp://<username>:<password>@<camera-ip-address>/<stream-name>
-
-set -o allexport; source .env; set +o allexport
-
-./prusa-connect-camera.sh
-
-```
-
-## Docs
+Preview documentation locally
 
 ```shell
 pip install -r requirements.txt
@@ -47,7 +30,9 @@ mkdocs serve
 
 Auto-published by github action when pushed to master.
 
-## Code commits
+### Code commits
+
+ensure to have [pre-commit](https://pre-commit.com/) installed.
 
 ```shell
 npm install -g markdown-link-check
@@ -58,7 +43,7 @@ git add .
 pre-commit run --all
 ```
 
-## Docker container build
+### Docker container build
 
 ```shell
 make quay
