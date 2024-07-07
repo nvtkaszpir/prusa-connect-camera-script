@@ -51,3 +51,17 @@ CAMERA_COMMAND=fswebcam
 CAMERA_COMMAND_EXTRA_PARAMS="--resolution 1280x960 --no-banner"
 ```
 <!-- markdownlint-enable line_length -->
+
+Microsoft LifeCam HD-3000, USB, to avoid image capture tearing we skip first 10
+frames `-S 10` which also helps to set up proper auto exposure and white balance.
+
+<!-- markdownlint-disable line_length -->
+```shell
+PRINTER_ADDRESS=192.168.1.25
+PRUSA_CONNECT_CAMERA_TOKEN=redacted
+PRUSA_CONNECT_CAMERA_FINGERPRINT=7054ba85-bc19-4eb9-badc-6129575d9651
+CAMERA_DEVICE=/dev/video4
+CAMERA_COMMAND=fswebcam
+CAMERA_COMMAND_EXTRA_PARAMS="-S 10 --resolution 1280x720 --no-banner -s auto_exposure=1,brightness=128,contrast=5"
+```
+<!-- markdownlint-enable line_length -->

@@ -92,7 +92,18 @@ Get device capabilities, especially `User controls`:
 v4l2-ctl -d /dev/video0 -l
 ```
 
-and set accordingly parameters you want in `CAMERA_SETUP_COMMAND` env var, for example:
+Those params can be passed in various ways, depending on the requirement:
+
+* `CAMERA_COMMAND_EXTRA_PARAMS` emv var, when using given tool directly
+* `CAMERA_SETUP_COMMAND` env var for some complex use cases
+* other (probably directly via v4l when using ffmpeg, not tested)
+
+and set accordingly parameters you want , you just need to pass them fswebcam,
+for example:
+
+`CAMERA_COMMAND_EXTRA_PARAMS=--resolution 1280x960 --no-banner -s auto_exposure=1,brightness=128,contrast=5`
+
+For more advanced options see `CAMERA_SETUP_COMMAND` env var, for example:
 
 ```shell
 CAMERA_SETUP_COMMAND="v4l2-ctl --set-ctrl brightness=64,gamma=300 -d $CAMERA_DEVICE"
@@ -101,6 +112,43 @@ CAMERA_SETUP_COMMAND="v4l2-ctl --set-ctrl brightness=64,gamma=300 -d $CAMERA_DEV
 remember to restart given camera service.
 
 You can try to use `guvcview` desktop application to check prams in realtime.
+
+## Image issues
+
+If your captured image has below issues:
+
+* the whole image is too dark or too bright and it changes with every capture
+  so it get too dark or too bright in a matter of minutes:
+  ![image.artifacts.dark](./static/image.artifacts.dark.jpg)
+  ![image.artifacts.normal](./static/image.artifacts.normal.jpg)
+  ![image.artifacts.bright](./static/image.artifacts.bright.jpg)
+
+* has some horizontal/vertical super bright/dark areas:
+  ![image.artifacts.0](./static/image.artifacts.0.jpg)
+  ![image.artifacts.1](./static/image.artifacts.1.jpg)
+
+* some visible artifacts such as colored blocks or missing image fragments:
+  ![image.artifacts.2](./static/image.artifacts.2.jpg)
+  ![image.artifacts.3](./static/image.artifacts.3.jpg)
+  ![image.artifacts.4](./static/image.artifacts.4.jpg)
+
+then you may need to initialize camera and capture it with a delay
+or drop initial number of frames.
+
+Notice that sometimes you cannot do much about it (remote cams) because some
+camera images will be broken anyway, then I suggest changing camera.
+
+### Dropping frames
+
+Usually this is the fastest and with `fswebcam` it can be achieved by passing `-S`
+param, for example
+
+`-S 10` will skip 10 first frames.
+
+### Delay
+
+`fswebcam`  param `-d 2` will delay capture for 2 seconds, for some cameras it may
+help.
 
 ## Image flip and rotation
 
@@ -139,6 +187,14 @@ so for example:
 ```shell
 CAMERA_COMMAND=fswebcam
 CAMERA_COMMAND_EXTRA_PARAMS="--flip v --resolution 640x480 --no-banner"
+```
+
+or to skip first 10 frames (`-S 10`, helps to get proper auto white balance and
+image exposure) and pass on camera controls:
+
+```shell
+CAMERA_COMMAND=fswebcam
+CAMERA_COMMAND_EXTRA_PARAMS="-S 10 --resolution 1280x720 --no-banner -s auto_exposure=1,brightness=128,contrast=5"
 ```
 
 ## ffmpeg
