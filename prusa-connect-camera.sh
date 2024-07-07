@@ -7,9 +7,8 @@
 
 # Printer address to ping
 # if address is unreachable there is no point in sending an image
-# set to 127.0.0.1 to always send images
 # set to empty value to disable this feature
-: "${PRINTER_ADDRESS:=127.0.0.1}"
+: "${PRINTER_ADDRESS:=}"
 
 # PrusaConnect API key
 : "${PRUSA_CONNECT_CAMERA_TOKEN:=unset}"
@@ -57,7 +56,7 @@
 
 # validators
 if ! [[ -w "${TARGET_DIR}" ]]; then
-  echo "ERROR: ${TARGET_DIR} is not writable"
+  echo "ERROR: TARGET_DIR=${TARGET_DIR} is not writable"
   echo "If you run in read only systems then ensure to mount ${TARGET_DIR} as write volume"
   exit 1
 fi
@@ -76,7 +75,7 @@ fi
 
 
 if [[ ! -r "${CAMERA_DEVICE}" ]]; then
-  echo "ERROR: Could not read camera device ${CAMERA_DEVICE}"
+  echo "ERROR: Could not read camera device CAMERA_DEVICE=${CAMERA_DEVICE}"
   echo "Are you sure current user can read that file?"
   echo "Did you enable camera in raspi-config and did reboot?"
   echo "Does the device exist? Check for missing kernel modules, disconnected cables..."
