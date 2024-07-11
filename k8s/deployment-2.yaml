@@ -1,0 +1,90 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: cam-2
+  labels:
+    app.kubernetes.io/name: cam-2
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  strategy:
+    type: Recreate
+
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cam-2
+
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: cam-2
+
+    spec:
+      nodeName: hormex # change this to the desired host with given hardware
+      automountServiceAccountToken: false
+      enableServiceLinks: false
+      containers:
+        - name: script
+          tty: true # get that logs flowing to stdout/stderr
+          envFrom:
+            - secretRef:
+                name: cam-2
+          image: quay.io/kaszpir/prusa-connect-script:latest
+          imagePullPolicy: IfNotPresent
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh","-c","echo graceful-shutdown-start;sleep 2;echo graceful-shutdown-end"] # wait for inflight requests to finish
+          livenessProbe:
+            exec:
+              command:
+                - bash
+                - -c
+                - test $(find /dev/shm/ -mmin -1 | wc -l) -gt "0"
+            initialDelaySeconds: 5
+            periodSeconds: 15
+
+          securityContext:
+            # allowPrivilegeEscalation: false
+            privileged: true
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+            capabilities:
+              drop:
+                - ALL
+              # add:
+              #   - NET_RAW # needed for ping if not using
+
+          resources:
+            requests:
+              cpu: "0.1"
+              memory: "32Mi"
+            limits:
+              cpu: "1.0"
+              memory: "128Mi"
+
+          volumeMounts:
+            - mountPath: /dev/shm
+              name: dev-shm
+            - mountPath: /dev/video999 # must be the same as in `volumes` section and in cam.env
+              name: dev-video
+      # securityContext:
+      #   runAsUser: 1000
+      #   # runAsGroup: video
+      #   # fsGroup: 2000
+      # tolerations:
+      #   - key: "rpi"
+      #     operator: "Exists"
+      #     effect: "NoSchedule"
+      terminationGracePeriodSeconds: 10 # let it finish the sending the picture
+      volumes:
+        - name: dev-shm
+          emptyDir:
+            medium: Memory
+        - name: dev-video
+          hostPath:
+            path: /dev/video1 # change this to the device on the host

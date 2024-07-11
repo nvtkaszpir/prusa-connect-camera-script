@@ -1,0 +1,1 @@
+../prusa-connect-camera.sh

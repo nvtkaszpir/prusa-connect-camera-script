@@ -73,6 +73,7 @@ nav:
     - Overview: service.md
     - Systemd: service.systemd.md
     - Docker: service.docker.md
+    - Kubernetes: service.kubernetes.md
 
   - Configuration Tuning: configuration.tuning.md
   - Configuration all env vars: configuration.env.full.md

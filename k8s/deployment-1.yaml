@@ -1,0 +1,96 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: cam-1
+  labels:
+    app.kubernetes.io/name: cam-1
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  strategy:
+    type: Recreate
+
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cam-1
+
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: cam-1
+
+    spec:
+      automountServiceAccountToken: false
+      enableServiceLinks: false
+      containers:
+        - name: script
+          tty: true # get that logs flowing to stdout/stderr
+          command:
+            - /script/prusa-connect-camera.sh
+          envFrom:
+            - secretRef:
+                name: cam-1
+          image: quay.io/kaszpir/prusa-connect-script:latest
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+              # add:
+              #   - NET_RAW
+          ports:
+            - name: status
+              containerPort: 8080
+              protocol: TCP
+
+          resources:
+            requests:
+              cpu: "0.1"
+              memory: "32Mi"
+            limits:
+              cpu: "1.0"
+              memory: "128Mi"
+
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh","-c","echo graceful-shutdown-start;sleep 2;echo graceful-shutdown-end"] # wait for inflight requests to finish
+
+          livenessProbe:
+            exec:
+              command:
+                - bash
+                - -c
+                - test $(find /dev/shm/ -mmin -1 | wc -l) -gt "0"
+            initialDelaySeconds: 5
+            periodSeconds: 15
+
+          # readinessProbe:
+          #   httpGet:
+          #     path: /health
+          #     port: status
+
+          volumeMounts:
+            - mountPath: /script/
+              name: script
+            - mountPath: /dev/shm
+              name: dev-shm
+
+      terminationGracePeriodSeconds: 10
+      volumes:
+
+        - name: dev-shm
+          emptyDir:
+            medium: Memory
+
+        - name: script
+          configMap:
+            name: script
+            defaultMode: 0755

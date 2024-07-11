@@ -1,0 +1,29 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: prusa-connect-camera
+
+resources:
+  - namespace.yaml
+
+  - deployment-1.yaml
+  # - deployment-2.yaml
+
+secretGenerator:
+  - name: cam-1
+    envs:
+      - configs/cam-1.env
+  - name: cam-2
+    envs:
+      - configs/cam-2.env
+
+
+configMapGenerator:
+  - name: script
+    files:
+      - prusa-connect-camera.sh
+
+images:
+  - name: quay.io/kaszpir/prusa-connect-script
+    newName: bagno.hlds.pl:16000/quay.io/kaszpir/prusa-connect-script
+    newTag: "5a471cf"
