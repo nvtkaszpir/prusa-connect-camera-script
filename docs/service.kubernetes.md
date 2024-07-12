@@ -1,4 +1,4 @@
-# Running in kubernetes
+# Running in Kubernetes
 
 Yes, because why not, especially if you run k3s :D
 
