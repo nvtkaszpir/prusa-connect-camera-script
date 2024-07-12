@@ -4,11 +4,15 @@ Yes, because why not, especially if you run k3s :D
 
 This is just an example but you should be able to adjust it to your needs.
 
+See [directory](https://github.com/nvtkaszpir/prusa-connect-camera-script/tree/master/k8s)
+for the content you can use with a [kustomize](https://kustomize.io/).
+
 ## Overview
 
 - each camera should be a separate kubernetes deployment, easier to manage.
 
-- in `configs` there is a one file with env vars loaded per deployment,
+- in [configs](https://github.com/nvtkaszpir/prusa-connect-camera-script/tree/master/k8s/configs)
+  there is a one file with env vars loaded per deployment,
   those env vars **MUST BE** changed as in env vars
   Also do not use double quotes the values.
 
@@ -16,11 +20,11 @@ This is just an example but you should be able to adjust it to your needs.
 
 ## Examples
 
-- [deployment-1.yaml](https://github.com/nvtkaszpir/prusa-connect-camera-script/k8s/deployment-1.yaml)
+- [deployment-1.yaml](https://github.com/nvtkaszpir/prusa-connect-camera-script/blob/master/k8s/deployment-1.yaml)
   is an example to fetch image from a stream using ffmpeg and with custom
   prusa-connect-camera.sh for easier development/iteration
 
-- [deployment-2.yaml](https://github.com/nvtkaszpir/prusa-connect-camera-script/k8s/deployment-2.yaml)
+- [deployment-2.yaml](https://github.com/nvtkaszpir/prusa-connect-camera-script/blob/master/k8s/deployment-2.yaml)
   is an example how to run it on Raspberry Pi with USB camera using default parameters.
   You want to change `.spec.nodeName` and volumes to point to desired camera.
 
