@@ -8,6 +8,7 @@ resources:
 
   - deployment-1.yaml
   # - deployment-2.yaml
+  - daemonset.yaml
 
 secretGenerator:
   - name: cam-1

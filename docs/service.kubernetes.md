@@ -25,11 +25,21 @@ for the content you can use with a [kustomize](https://kustomize.io/).
 
 - [deployment-1.yaml](https://github.com/nvtkaszpir/prusa-connect-camera-script/blob/master/k8s/deployment-1.yaml)
   is an example to fetch image from a stream using ffmpeg and with custom
-  prusa-connect-camera.sh for easier development/iteration
+  prusa-connect-camera.sh for easier development/iteration.
+  This is also preferred option when you are not using cameras that are directly
+  attached to the hosts, but rely on using ffmpeg to fetch images from remote
+  streams or static images via curl.
 
 - [deployment-2.yaml](https://github.com/nvtkaszpir/prusa-connect-camera-script/blob/master/k8s/deployment-2.yaml)
   is an example how to run it on Raspberry Pi with USB camera using default parameters.
   You want to change `.spec.nodeName` and volumes to point to desired camera.
+
+- [daemonset.yaml](https://github.com/nvtkaszpir/prusa-connect-camera-script/blob/master/k8s/daemonset.yaml)
+  is an example how to run it on Raspberry Pi with USB camera using default parameters.
+  You want to change `.spec.nodeName` and volumes to point to desired camera.
+  The difference between the DaemonSet and Deployment is that with the Deployment
+  kubernetes will try to spawn new pods even if node is not available.
+  DaemonSet it is better when you have to use directly attached devices to the hosts.
 
 ## More copies
 
