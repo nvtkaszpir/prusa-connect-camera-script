@@ -8,7 +8,7 @@ services:
     read_only: true
     restart: unless-stopped
     env_file:
-    - .docker-csi
+    - .docker-csi # copy docker-csi.dist as .docker-csi and adjust env vars
     devices:
     - /dev:/dev
     volumes:
@@ -25,7 +25,7 @@ services:
     read_only: true
     restart: unless-stopped
     env_file:
-    - .docker-video0
+    - .docker-video0 # copy docker-video0.dist as .docker-video0 and adjust env vars
     devices:
     - /dev:/dev
     volumes:
@@ -42,7 +42,7 @@ services:
     read_only: true
     restart: unless-stopped
     env_file:
-    - .docker-esphome-snapshot
+    - .docker-esphome-snapshot # copy docker-esphome-snapshot.dist as .docker-esphome-snapshot and adjust env vars
     volumes:
     - type: tmpfs
       target: /dev/shm
