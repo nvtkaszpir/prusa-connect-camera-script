@@ -18,6 +18,9 @@ for the content you can use with a [kustomize](https://kustomize.io/).
 
 - deployment possible using for example kustomize
 
+- camera device - if you have more cameras you probably want to use device
+  by-id or by-path, see [tuning](./configuration.tuning.md) for more details
+
 ## Examples
 
 - [deployment-1.yaml](https://github.com/nvtkaszpir/prusa-connect-camera-script/blob/master/k8s/deployment-1.yaml)

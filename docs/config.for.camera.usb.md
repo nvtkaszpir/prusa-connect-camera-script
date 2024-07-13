@@ -37,6 +37,9 @@ For more details about formats it is better to use
 
 Next, [test config](./test.config.md).
 
+Note: if you have more cameras you probably want to use device by-id or by-path,
+see [tuning](./configuration.tuning.md) for more details.
+
 ## Real world example
 
 Raspberry Pi Zero W with endoscope camera over USB, registered as `/dev/video1`:

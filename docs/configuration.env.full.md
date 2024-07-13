@@ -9,7 +9,7 @@ Config for camera is to the script as environment variables (env vars).
 * `PRINTER_ADDRESS` - Printer address to ping, if address is unreachable there
   is no point in sending an image. Set to `127.0.0.1` to always send images.
   Set to empty value to disable ping check and always send images.
-  Default value `127.0.0.1`
+  Default value `127.0.0.1`.
 
 * `PRUSA_CONNECT_CAMERA_TOKEN` - required, PrusaConnect API key
 
@@ -22,6 +22,8 @@ Config for camera is to the script as environment variables (env vars).
 * `CAMERA_DEVICE` - camera device to use, if you use Raspberry Pi camera
   attached to the CSI via camera ribbon then leave as is
   Default `/dev/video0` which points to first detected camera.
+  If you have more cameras you probably want to use device
+  by-id or by-path, see [tuning](./configuration.tuning.md) for more details.
 
 * `CAMERA_SETUP_COMMAND` - camera setup command and params executed before
   taking image, default value is empty, because some cameras do not support it,

@@ -7,6 +7,51 @@ Below steps depend on the camera capabilities, thus your mileage may vary.
 Notice that Prusa Connect has file size limit something about 8MB of the image uploaded,
 so there may be no point in getting images with super high resolutions.
 
+## Using predicable camera device names
+
+Somethimes devices change their id so once given camera is under `/dev/video1`
+while another restart and it is under `/dev/video2` and swaps with another one.
+
+If you want to have a predictable camera identifiers then see directory
+`/dev/v4l/by-id` or `/dev/v4l/by-path` and choose the one that you prefer
+
+Example on Rasberry Pi with CSI camera and two USB cameras:
+
+```text
+pi@hormex:~ $ tree /dev/v4l
+/dev/v4l
+├── by-id
+│   ├── usb-Generic_USB_Camera_200901010001-video-index0 -> ../../video3
+│   ├── usb-Generic_USB_Camera_200901010001-video-index1 -> ../../video4
+│   ├── usb-Microsoft_Microsoft®_LifeCam_HD-3000-video-index0 -> ../../video1
+│   └── usb-Microsoft_Microsoft®_LifeCam_HD-3000-video-index1 -> ../../video2
+└── by-path
+    ├── platform-bcm2835-codec-video-index0 -> ../../video18
+    ├── platform-bcm2835-isp-video-index0 -> ../../video20
+    ├── platform-bcm2835-isp-video-index1 -> ../../video21
+    ├── platform-bcm2835-isp-video-index2 -> ../../video22
+    ├── platform-bcm2835-isp-video-index3 -> ../../video23
+    ├── platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.3:1.0-video-index0 -> ../../video3
+    ├── platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.3:1.0-video-index1 -> ../../video4
+    ├── platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.4:1.0-video-index0 -> ../../video1
+    ├── platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.4:1.0-video-index1 -> ../../video2
+    ├── platform-fe801000.csi-video-index0 -> ../../video0
+    └── platform-feb10000.codec-video-index0 -> ../../video19
+```
+
+so now if I want to have a Camera-1 always to point to the LifeCam_HD-3000
+I can use:
+
+```shell
+CAMERA_DEVICE=/dev/v4l/by-id/usb-Microsoft_Microsoft®_LifeCam_HD-3000-video-index0
+```
+
+and for CSI camera (notice it is not available under `by-id`):
+
+```shell
+CAMERA_DEVICE=/dev/v4l/by-path/platform-fe801000.csi-video-index0
+```
+
 ## Getting higher quality camera images
 
 Use `v4l2-ctl` to get the list of available resolutions that camera provides
