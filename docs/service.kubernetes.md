@@ -40,6 +40,11 @@ for the content you can use with a [kustomize](https://kustomize.io/).
   The difference between the DaemonSet and Deployment is that with the Deployment
   kubernetes will try to spawn new pods even if node is not available.
   DaemonSet it is better when you have to use directly attached devices to the hosts.
+  Of course in that case you will need a daemonset per camera per host,
+  and separate config for each camera/host, and you would need the same with
+  a deployment, but at least when node is gone you are not getting non-schedulable
+  pod every few minutes. With a daemonset when node is gone, then pod is gone
+  and k8s is not trying to spawn new pods.
 
 ## More copies
 
