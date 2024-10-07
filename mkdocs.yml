@@ -47,6 +47,7 @@ nav:
 
   - Preparation:
     - Requirements: requirements.md
+    - Known Limitations: known.limitations.md
     - Installation: installation.md
   - Configuration:
     - Overview: configuration.overview.md
