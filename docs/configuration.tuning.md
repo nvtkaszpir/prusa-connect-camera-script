@@ -7,15 +7,15 @@ Below steps depend on the camera capabilities, thus your mileage may vary.
 Notice that Prusa Connect has file size limit something about 8MB of the image uploaded,
 so there may be no point in getting images with super high resolutions.
 
-## Using predicable camera device names
+## Using predictable camera device names
 
-Somethimes devices change their id so once given camera is under `/dev/video1`
+Sometimes devices change their id so once given camera is under `/dev/video1`
 while another restart and it is under `/dev/video2` and swaps with another one.
 
 If you want to have a predictable camera identifiers then see directory
 `/dev/v4l/by-id` or `/dev/v4l/by-path` and choose the one that you prefer
 
-Example on Rasberry Pi with CSI camera and two USB cameras:
+Example on Raspberry Pi with CSI camera and two USB cameras:
 
 ```text
 pi@hormex:~ $ tree /dev/v4l
@@ -193,7 +193,7 @@ param, for example
 ### Delay
 
 `fswebcam`  param `-d 2` will delay capture for 2 seconds, for some cameras it may
-help.
+help, especially when using auto white balance or auto exposure.
 
 ## Image flip and rotation
 
@@ -291,4 +291,5 @@ Frankly speaking you can do anything you want with ffmpeg, for example
 
 `-vf transpose=1,shufflepixels=m=block:height=16:width=16`
 
+which effectively shuffles image blocks around.
 Why? why not :D

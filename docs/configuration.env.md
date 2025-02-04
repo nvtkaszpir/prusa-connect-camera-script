@@ -11,6 +11,6 @@ The most important env vars are:
 * `CAMERA_COMMAND`
 * `CAMERA_COMMAND_EXTRA_PARAMS`
 
-Those env vars will be filled in in the next steps.
+Those env vars will be filled in the next steps.
 
 Full list of env vars can be seen [here](./configuration.env.full.md)

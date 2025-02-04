@@ -1,9 +1,9 @@
 # Web Cam - RTSP stream
 
-## Caution
+!!! warning
 
-**DO NOT use VLC to test streams**, there are unfortunately problems with it.
-Please use `ffplay` from `ffmpeg` package.
+    **DO NOT use VLC to test streams**, there are unfortunately problems with it.
+    Please use `ffplay` from `ffmpeg` package.
 
 You have some options such as TCP or UDP stream (whatever..).
 This should work with any other camera (usually there is a different port per stream)
@@ -41,7 +41,7 @@ My another Rpi Zero W named `hormex` has two cameras:
 - CSI
 - endoscope on /dev/video
 
-and I'm running `mediamtx` server to conver those to RTSP streams.
+and I'm running `mediamtx` server to convert those to RTSP streams.
 More about mediamtx is [here](./stream.mediamtx.md).
 
 So I can have two configs:

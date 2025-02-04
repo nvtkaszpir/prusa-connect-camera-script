@@ -1,7 +1,7 @@
 # Test the config
 
 - ensure to turn on the 3D Printer so that it sends telemetry, otherwise images
-  will sent and you will get successful image uploads but on PrusaConnect page
+  will sent and you will get successful image uploads but on Prusa Connect page
   they will not be available
 - run below commands, we assume `.env` is the camera config we defined earlier
 

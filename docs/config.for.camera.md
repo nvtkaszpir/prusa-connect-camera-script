@@ -6,7 +6,7 @@
 
 ## Fingerprint
 
-`PRUSA_CONNECT_CAMERA_FINGERPRINT` should be uniqe and set only once for each camera.
+`PRUSA_CONNECT_CAMERA_FINGERPRINT` should be unique and set only once for each camera.
 
 Fingerprint can be easily generated using command:
 
@@ -17,9 +17,13 @@ uuidgen
 or via [online website](https://www.uuidgenerator.net/version4),
 just copy/paste the output as fingerprint value into the config.
 
-**Do not** change fingerprint after launching the script - thus camera is registered
-and you may need to revert the change or delete and readd camera again and start
-from scratch.
+<!-- markdownlint-disable code_block_style -->
+!!! warning
+
+    **Do not** change fingerprint after launching the script - thus camera is registered
+    and you may need to revert the change or delete and re-add camera again and start
+    from scratch.
+<!-- markdownlint-enable code_block_style -->
 
 ## Example devices
 

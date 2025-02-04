@@ -16,5 +16,4 @@ on older Raspberry Pi (see `cat /etc/os-release`)
 Fix:
 you can comment out (or remove) in `prusa-connect-camera.sh` script lines
 containing those options by just removing them, until it works.
-
-But frankly speaking you REALLY should think about upgrading your operating system.
+Frankly speaking you REALLY should think about upgrading your operating system.

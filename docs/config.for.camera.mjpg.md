@@ -37,7 +37,7 @@ Next, [test config](./test.config.md).
 
 ## Unverified example
 
-Beagle Camera stream - if I remember correctly, then camera url to the stream
+Beagle Camera stream - if I remember correctly, the camera URL to the stream
 is something like `http://192.168.2.92/ipcam/mjpeg.cgi`
 
 Replace `192.168.2.92` with your address in the example below.
@@ -53,5 +53,5 @@ CAMERA_COMMAND_EXTRA_PARAMS="-y -i 'http://192.168.2.92/ipcam/mjpeg.cgi' -vframe
 ```
 <!-- markdownlint-enable line_length -->
 
-But it is better to use a snapshot instead of stream if available,
+Notice that it is better to use a snapshot instead of stream if available,
 see [here](./config.for.camera.snapshot.md#beagle-camera).

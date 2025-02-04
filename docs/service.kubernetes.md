@@ -1,6 +1,6 @@
 # Running in Kubernetes
 
-Yes, because why not, especially if you run k3s :D
+Yes, because why not, especially if you run [k3s](https://k3s.io/) :D
 
 This is just an example but you should be able to adjust it to your needs.
 
@@ -9,14 +9,15 @@ for the content you can use with a [kustomize](https://kustomize.io/).
 
 ## Overview
 
-- each camera should be a separate kubernetes deployment, easier to manage.
+- each camera should be a separate kubernetes deployment (or daemonset),
+  easier to manage.
 
 - in [configs](https://github.com/nvtkaszpir/prusa-connect-camera-script/tree/master/k8s/configs)
   there is a one file with env vars loaded per deployment,
-  those env vars **MUST BE** changed as in env vars
-  Also do not use double quotes the values.
+  those env vars **MUST BE** changed as in env vars.
+  Also do not use double quotes inside the values.
 
-- deployment possible using for example kustomize
+- deployment possible using for example [kustomize](https://kustomize.io/)
 
 - camera device - if you have more cameras you probably want to use device
   by-id or by-path, see [tuning](./configuration.tuning.md) for more details
@@ -32,19 +33,25 @@ for the content you can use with a [kustomize](https://kustomize.io/).
 
 - [deployment-2.yaml](https://github.com/nvtkaszpir/prusa-connect-camera-script/blob/master/k8s/deployment-2.yaml)
   is an example how to run it on Raspberry Pi with USB camera using default parameters.
-  You want to change `.spec.nodeName` and volumes to point to desired camera.
+  You want to change `.spec.nodeName` and volumes to point to desired host with
+  the attached camera.
 
 - [daemonset.yaml](https://github.com/nvtkaszpir/prusa-connect-camera-script/blob/master/k8s/daemonset.yaml)
   is an example how to run it on Raspberry Pi with USB camera using default parameters.
-  You want to change `.spec.nodeName` and volumes to point to desired camera.
-  The difference between the DaemonSet and Deployment is that with the Deployment
-  kubernetes will try to spawn new pods even if node is not available.
-  DaemonSet it is better when you have to use directly attached devices to the hosts.
-  Of course in that case you will need a daemonset per camera per host,
-  and separate config for each camera/host, and you would need the same with
-  a deployment, but at least when node is gone you are not getting non-schedulable
-  pod every few minutes. With a daemonset when node is gone, then pod is gone
-  and k8s is not trying to spawn new pods.
+  You want to change `.spec.nodeName` and volumes to point to desired host with
+  the attached camera.
+
+The difference between the DaemonSet and Deployment is that with the Deployment
+kubernetes will try to spawn new pods even if node is not available.
+DaemonSet it is better when you have to use directly attached devices to the hosts.
+
+Of course in that case you will need a daemonset per camera per host,
+and separate config for each camera/host, and you would need the same with
+a deployment, but at least when node is gone you are not getting non-schedulable
+pod every few minutes - imagine hundreds of pods when I turned off one of my
+Raspberry Pi for a week...
+With a daemonset when node is gone, then pod is gone
+and k8s is not trying to spawn new pods.
 
 ## More copies
 

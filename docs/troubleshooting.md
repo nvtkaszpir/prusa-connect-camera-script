@@ -4,76 +4,88 @@ Things to check if it does not work.
 
 ## General
 
-- some USB cameras require physical unplung/plug-in AFTER
-  the Rasberry Pi was turned on, there is no fix for this yet, see
+- some USB cameras require physical unplugging/plug-in **AFTER**
+  the Raspberry Pi was turned on, there is no fix for this yet, see
   [raspberrypi/linux/issues/6255](https://github.com/raspberrypi/linux/issues/6255)
   for such example
 
 - check `/dev/shm/camera_*.stdout` and `/dev/shm/camera_*.stderr`
-  files for more details - if they still that 'everything is okay'
+  files for more details - if they state that 'everything is okay'
   then probably you have issues with permissions when running script
   for the second time (see below)
 
+## System file permissions
+
+Check files under `/dev/shm/camera*` and `/dev/video0`
+
+```shell
+ls -la /dev/shm/camera* /dev/video*
+```
+
+and compare them with the current user executing the script or the user that
+is running docker (see below) or systemd service (see section below).
+
+The quickest fix is just to delete files in `/dev/shm/camera_*`
+to fix only specific permission issues:
+
+```shell
+sudo systemctl stop prusa-connect-camera@env.service
+sudo rm -f /dev/shm/camera_*
+sudo systemctl start prusa-connect-camera@env.service
+```
+
+and see if the issue is resolved.
+
+If you still have issues due to accessing `/dev/video*` then ensure the user
+is added to `video` group.
+
+## Physical
+
+Check if the camera actually works - check cables if they are not damaged,
+if the cables are properly plugged, if the camera connects to the network...
+Some cameras when accessed will turn on led light showing that they are used.
+
+## Networking
+
 - if you use feature to ping the printer then ensure printer is up and running
   and responds to ping, or just disable the feature (set `PRINTER_ADDRESS=""` or
-  to `PRINTER_ADDRESS=127.0.0.1`)
+  to `PRINTER_ADDRESS=127.0.0.1`), also make sure to allow ICMP protocol
+  on the firewalls on the target and on [docker host](https://github.com/moby/moby/issues/45031)
 
-- check if the camera actually works - check cables if they are not damaged,
-  if the cables are properly plugged, if the camera connects to the network...
+- check IP/domain names for remote camera - try that you can access camera over
+  IP address, otherwise you have a [DNS issues](https://www.reddit.com/r/homelab/comments/5i6kza/a_haiku_about_dns/).
+
+## Camera Parameters
 
 - check if the camera supports passed parameters such as resolution and codec,
   especially after replacing the camera - see [tuning](./configuration.tuning.md)
   how to use `v4l2-ctl` to see available camera options.
 
-- check if any other app is not accessing the camera - especially local cameras
-  are locked by another processes.
+## Other camera apps
 
-  If another application is accessing camera then unfortunately **only one app can
-  access the camera** and you must decide which app to run.
+Check if any other app is not accessing the camera - especially local cameras
+are locked by another processes.
 
-  This means if you have something like Klipper/Obico/PrusaLink/motioneye/frigate
-  (and so on) accessing the directly attached device to the Raspberry Pi
-  then it will not work.
+If another application is accessing camera then unfortunately by default
+**only one app can access the camera** and you must decide which app to run.
 
-  In such case you can try to find the process
-  using `fuser` package, assuming `/dev/video0` is your camera:
+This means if you have something like Klipper/Obico/PrusaLink/motioneye/frigate
+(and so on) accessing the directly attached device to the Raspberry Pi
+then it will not work.
 
-  ```shell
-  sudo apt install -y psmisc
-  fuser /dev/video0
-  ```
+In such case you can try to find the process
+using `fuser` package, assuming `/dev/video0` is your camera:
 
-  See [StackOverflow](https://stackoverflow.com/questions/24554614/how-find-out-which-process-is-using-a-file-in-linux)
-  for more details.
+```shell
+sudo apt install -y psmisc
+fuser /dev/video0
+```
 
-  In general you [could create a loopback camera device](https://forums.raspberrypi.com/viewtopic.php?t=121901)
-  but this is quite a lot of work to do.
+See [StackOverflow](https://stackoverflow.com/questions/24554614/how-find-out-which-process-is-using-a-file-in-linux)
+for more details.
 
-- check IP/domain names for remote camera - try that you can access camera over
-  IP address, otherwise you have a [DNS issues](https://www.reddit.com/r/homelab/comments/5i6kza/a_haiku_about_dns/).
-
-- file permissions - check files under `/dev/shm/camera*` and `/dev/video0`
-
-  ```shell
-  ls -la /dev/shm/camera* /dev/video*
-  ```
-
-  and compare them with the current user executing the script or the user that
-  is running docker (see below) or systemd service (see section below).
-
-  The quickest fix is just to delete files in `/dev/shm/camera_*`
-  to fix only specific permission issues:
-
-  ```shell
-  sudo systemctl stop prusa-connect-camera@env.service
-  sudo rm -f /dev/shm/camera_*
-  sudo systemctl start prusa-connect-camera@env.service
-  ```
-
-  and see if the issue is resolved.
-
-  If you still have issues due to accessing `/dev/video*` then ensure the user
-  is added to `video` group.
+In general you [could create a loopback camera device](https://forums.raspberrypi.com/viewtopic.php?t=121901)
+but this is quite a lot of work to do.
 
 ## Docker troubleshooting
 
@@ -94,7 +106,7 @@ Things to check if it does not work.
   Another option is to run container with [--network="host"](https://docs.docker.com/reference/cli/docker/container/run/#network)
   or
   [network_mode: "host"](https://docs.docker.com/compose/compose-file/05-services/#network_mode)
-  in docker-compose.
+  in docker-compose, but this is not recommended.
 
 ## Systemd troubleshooting
 
@@ -133,19 +145,19 @@ like below, ensure to replace `env` with the name your camera is using:
 
 ### Permissions issues
 
-- check if the user used in systemd file is the same as the one which executed
-  test command - and you can edit systemd unit file via `nano` editor
+Check if the user used in systemd file is the same as the one which executed
+test command - and you can edit systemd unit file via `nano` editor
 
-  ```shell
-  sudo nano /etc/systemd/system/prusa-connect-camera@.service
-  ```
+```shell
+sudo nano /etc/systemd/system/prusa-connect-camera@.service
+```
 
-  and replace `User=pi` and `Group=pi` with the current user and group,
-  then reload systemd and start service again
+and replace `User=pi` and `Group=pi` with the current user and group,
+then reload systemd and start service again
 
-  ```shell
-  sudo systemctl daemon-reload
-  sudo systemctl start prusa-connect-camera@env.service
-  ```
+```shell
+sudo systemctl daemon-reload
+sudo systemctl start prusa-connect-camera@env.service
+```
 
-  This way it will use your user account to access camera device and write files.
+This way it will use your user account to access camera device and write files.

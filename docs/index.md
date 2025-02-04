@@ -26,8 +26,8 @@ sequenceDiagram
     script->>script: show errors if image_on_disk is missing
     script->>curl: run curl to post image to Prusa Connect API (pass image_on_disk)
     curl->>image_on_disk: curl reads image from disk
-    curl->>PrusaConnect: send image to Prusa Connect
-    PrusaConnect->>curl: return response code / messages
+    curl->>Prusa Connect: send image to Prusa Connect
+    Prusa Connect->>curl: return response code / messages
     script->>script: sleep + end loop
 
 ```

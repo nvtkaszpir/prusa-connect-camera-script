@@ -2,7 +2,7 @@
 
 # basic config
 
-# sleep time in seconds between image captures, notice that PrusaConnect accepts images at most every 10s or slower
+# sleep time in seconds between image captures, notice that Prusa Connect accepts images at most every 10s or slower
 : "${SLEEP:=10}"
 
 # Printer address to ping
@@ -10,9 +10,9 @@
 # set to empty value to disable this feature
 : "${PRINTER_ADDRESS:=}"
 
-# PrusaConnect API key
+# Prusa Connect API key
 : "${PRUSA_CONNECT_CAMERA_TOKEN:=unset}"
-# PrusaConnect camera fingerprint, use for example 'uuidgen' to generate it, it must be at least 16 alphanumeric chars, 40 max
+# Prusa Connect camera fingerprint, use for example 'uuidgen' to generate it, it must be at least 16 alphanumeric chars, 40 max
 : "${PRUSA_CONNECT_CAMERA_FINGERPRINT:=unset}"
 
 # camera device to use, if you use camera attached to the CSI via camera ribbon then leave as is
@@ -20,7 +20,7 @@
 
 # camera setup command and params
 # executed before taking image
-# defualt is empty, because some cameras do not support it
+# default is empty, because some cameras do not support it
 # in general you want to use something like v4l2-ctl
 # <setup_command>
 # so for example:
@@ -29,8 +29,8 @@
 #   v4l2-ctl --set-ctrl brightness=10,gamma=120 -d /dev/video0
 : "${CAMERA_SETUP_COMMAND:=}"
 
-# avaliable options:
-# rpicam-still - using CSI camera + modern Rasberry Pi operating systems since Debian 11 Bullseye
+# available options:
+# rpicam-still - using CSI camera + modern Raspberry Pi operating systems since Debian 11 Bullseye
 # raspistill - using CSI camera + older Raspberry Pi operating systems
 # fswebcam - using USB camera + custom package 'fswebcam'
 # anything else will be processed directly, so for example you could use 'ffmpeg' in here
@@ -63,13 +63,13 @@ fi
 
 if [[ "${PRUSA_CONNECT_CAMERA_TOKEN}" = "unset" ]]; then
   echo "ERROR: PRUSA_CONNECT_CAMERA_TOKEN env var is not set, please set it in the script or in the env vars"
-  echo "Go to PrusaConnect site and add camera, copy Token and set in the script or in the env vars"
+  echo "Go to Prusa Connect site and add camera, copy Token and set in the script or in the env vars"
   exit 1
 fi
 
 if [[ "${PRUSA_CONNECT_CAMERA_FINGERPRINT}" = "unset" ]]; then
   echo "ERROR: PRUSA_CONNECT_CAMERA_FINGERPRINT env var is not set, please set it in the script or in the env vars"
-  echo "You can use 'uuidgen' shell command to generate unique id, remember not to change it aferwards (or delete and add camera)"
+  echo "You can use 'uuidgen' shell command to generate unique id, remember not to change it afterwards (or delete and add camera)"
   exit 1
 fi
 
@@ -183,10 +183,10 @@ while true; do
     exit 1
   fi
 
-  # get captured image size, this is required by PrusaConnect API
+  # get captured image size, this is required by Prusa Connect API
   image_size=$(stat --printf="%s"  "${TARGET_DIR}/camera_${PRUSA_CONNECT_CAMERA_FINGERPRINT}.jpg")
 
-  # push image to PrusaConnect, print return code, it should be 204 if all is ok, if not then you will see error message
+  # push image to Prusa Connect, print return code, it should be 204 if all is ok, if not then you will see error message
   curl -X PUT "${PRUSA_CONNECT_URL}" \
     -H "Accept: text/plain" \
     -H "Content-type: image/jpg" \

@@ -14,7 +14,7 @@ sudo systemctl daemon-reload
 Assuming that `/home/pi/src/prusa-connect-camera-script/.env` file was created in
 previous steps, we use that `.env` file as example camera config.
 
-Notice there is no dot before `env` in the commands below!
+Notice there is no dot before `env` in the commands below:
 
 ```shell
 sudo systemctl enable prusa-connect-camera@env.service

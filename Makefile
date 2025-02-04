@@ -92,3 +92,7 @@ quay_multiarch:  ## create multi-arch manifest and push it
 .PHONY: quay
 quay: ## build images and push to quay.io
 	$(MAKE) quay_amd64 quay_arm64 quay_arm_v7
+
+.PHONY: docs
+docs: ## run mkdocs serve
+	mkdocs serve

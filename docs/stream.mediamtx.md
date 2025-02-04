@@ -6,7 +6,7 @@ to create RTSP camera stream for test.
 Assuming you run [mediamtx with Raspberry Pi CSI camera](https://github.com/bluenviron/mediamtx#raspberry-pi-cameras)
 and that `raspberry-pi` is the hostname of your device and that you expose two cams:
 
-- CSI Rasberry Pi camera under /dev/video0
+- CSI Raspberry Pi camera under /dev/video0
 - USB camera under /dev/video1
 
 so your `mediamtx.yml` has config fragment such as:
@@ -54,7 +54,7 @@ Raspberry Pi Zero 2 + Logitech C920, thanks to [user [&] undso.io](https://forum
 for working example.
 
 Allows to have a camera live stream and prusa camera script to use that stream
-as source of the images to send to PrusaConnect.
+as source of the images to send to Prusa Connect.
 
 <!-- markdownlint-disable line_length -->
 mediamtx config fragment
