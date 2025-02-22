@@ -1,7 +1,7 @@
-# https://github.com/dtcooper/raspberrypi-os-docker/pkgs/container/raspberrypi-os/237003519?tag=bookworm
+# https://github.com/dtcooper/raspberrypi-os-docker/pkgs/container/raspberrypi-os/356489916?tag=bookworm
 
 ARG BASE_IMAGE=ghcr.io/dtcooper/raspberrypi-os:bookworm
-ARG BASE_DIGEST=sha256:b08a06776ace987d889ef41805711ce3cefcc18bbefad1295774ae395072e61f
+ARG BASE_DIGEST=sha256:1be02835ff0f4c094c0a40b27744f8a2d11b6f6adfd24b90590880aba762204d
 FROM ${BASE_IMAGE}@${BASE_DIGEST}
 
 ARG GIT_SOURCE
