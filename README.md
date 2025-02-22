@@ -48,4 +48,6 @@ pre-commit run --all
 ```shell
 make quay
 make quay_multiarch
+make quay_multiarch_latest
+
 ```

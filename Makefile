@@ -19,6 +19,7 @@ version: ## show git version
 lint-dockerfile: ## Runs hadolint against application dockerfile
 	docker run --rm -v "$(PWD):/data" -w "/data" hadolint/hadolint hadolint Dockerfile.amd64
 	docker run --rm -v "$(PWD):/data" -w "/data" hadolint/hadolint hadolint Dockerfile.arm64
+	docker run --rm -v "$(PWD):/data" -w "/data" hadolint/hadolint hadolint Dockerfile.arm-v7
 
 .PHONY: docker_config
 docker_config: ## configure docker to allow multi-arch builds
@@ -81,6 +82,8 @@ quay_multiarch:  ## create multi-arch manifest and push it
 		--amend
 	docker manifest push --purge quay.io/${QUAY_REPO_USER}/${QUAY_REPO_NAME}:${GIT_COMMIT}
 
+.PHONY: quay_multiarch_latest
+quay_multiarch_latest:  ## create multi-arch manifest and push it
 	docker manifest create \
 		quay.io/${QUAY_REPO_USER}/${QUAY_REPO_NAME}:latest \
 			quay.io/${QUAY_REPO_USER}/${QUAY_REPO_NAME}:${GIT_COMMIT}-amd64 \
