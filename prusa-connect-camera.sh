@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+# set -x # uncomment this for extremely spammy logs about script execution
 # basic config
 
 # sleep time in seconds between image captures, notice that Prusa Connect accepts images at most every 10s or slower
@@ -49,9 +49,9 @@
 # where to save camera images (they will be overwritten every time
 : "${TARGET_DIR:=/dev/shm}"
 # extra params to curl when pushing an image
-: "${CURL_EXTRA_PARAMS:=}"
+: "${CURL_EXTRA_PARAMS:=--verbose --max-time 5}"
 
-## end of config, do not modify (unless you knw what you are doing)
+## end of config, do not modify (unless you know what you are doing)
 : "${PRUSA_CONNECT_URL:=https://webcam.connect.prusa3d.com/c/snapshot}"
 
 # validators
