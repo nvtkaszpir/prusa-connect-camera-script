@@ -49,7 +49,7 @@ image: ## build images
 
 .PHONY: list_images
 list_images: ## list images if they were built
-	@docker image ls | grep ${GIT_COMMIT}
+	@docker image ls | grep ${GIT_COMMIT} || echo "No images built, run 'make quay'"
 
 
 .PHONY: clean
