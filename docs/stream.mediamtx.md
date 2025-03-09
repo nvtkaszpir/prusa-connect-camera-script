@@ -171,3 +171,8 @@ CAMERA_COMMAND=ffmpeg
 CAMERA_COMMAND_EXTRA_PARAMS="-loglevel error -y -i 'rtsp://rpi-address:8554/endoscope' -f image2 -vframes 1 -pix_fmt yuv420p "
 ```
 <!-- markdownlint-enable line_length -->
+
+## mediamtx in docker
+
+See [this PR](https://github.com/bluenviron/mediamtx/pull/4324)
+or the code in [here](https://github.com/nvtkaszpir/prusa-connect-camera-script/tree/master/hack/mediamtx).

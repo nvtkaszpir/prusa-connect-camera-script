@@ -26,3 +26,11 @@ indent_style = tab
 
 [*.json]
 indent_size = 4
+
+[/hack/mediamtx/*.txt]
+charset = unset
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+indent_style = unset
+indent_size = unset

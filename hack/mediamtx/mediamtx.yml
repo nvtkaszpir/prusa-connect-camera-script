@@ -1,0 +1,9 @@
+---
+paths:
+  cam:
+    source: rpiCamera
+    rpiCameraWidth: 1920
+    rpiCameraHeight: 1080
+    rpiCameraHFlip: true
+    rpiCameraVFlip: true
+    rpiCameraSaturation: 0 # black-white for NoIR cams
