@@ -66,6 +66,7 @@ nav:
     - ESPHome Stream: config.for.camera.esphome.stream.md
     - USB: config.for.camera.usb.md
     - Web Cams - Snapshot: config.for.camera.snapshot.md
+    - Web Cams - HLS streams: config.for.camera.hls.md
     - Web Cams - MJPG streams: config.for.camera.mjpg.md
     - Web Cams - RTSP streams: config.for.camera.rtsp.md
 
