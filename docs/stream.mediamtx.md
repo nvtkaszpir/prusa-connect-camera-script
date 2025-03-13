@@ -172,6 +172,16 @@ CAMERA_COMMAND_EXTRA_PARAMS="-loglevel error -y -i 'rtsp://rpi-address:8554/endo
 ```
 <!-- markdownlint-enable line_length -->
 
+## Formats
+
+Below examples are via rtsp protocol.
+
+FFmpeg does not support WebRTC (as of the moment of writing).
+
+If you want to use HLS then try something like
+`http://rpi-address:8554/cam/index.m3u8` as an input
+(just use `http://` and add `index.m3u8`).
+
 ## mediamtx in docker
 
 See [this PR](https://github.com/bluenviron/mediamtx/pull/4324)
