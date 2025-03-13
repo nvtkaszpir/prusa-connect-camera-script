@@ -6,8 +6,9 @@ namespace: prusa-connect-camera
 resources:
   - namespace.yaml
 
-  - deployment-1.yaml
+  - deployment-1.yaml # esp32
   # - deployment-2.yaml
+  - deployment-3.yaml # hls
   - daemonset.yaml
 
 secretGenerator:
@@ -17,12 +18,14 @@ secretGenerator:
   - name: cam-2
     envs:
       - configs/cam-2.env
-
+  - name: cam-3
+    envs:
+      - configs/cam-3.env
 
 configMapGenerator:
   - name: script
     files:
-      - prusa-connect-camera.sh
+      - prusa-connect-camera.sh # this is a symlink and kustomize will fail, this is intended
 
 images:
   - name: quay.io/kaszpir/prusa-connect-script

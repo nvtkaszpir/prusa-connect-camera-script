@@ -48,16 +48,13 @@ spec:
             periodSeconds: 15
 
           securityContext:
-            # allowPrivilegeEscalation: false
-            privileged: true
+            privileged: true # TODO: drop privileged
             readOnlyRootFilesystem: true
             runAsNonRoot: true
             runAsUser: 1000
             capabilities:
               drop:
                 - ALL
-              # add:
-              #   - NET_RAW # needed for ping if not using
 
           resources:
             requests:
@@ -72,14 +69,6 @@ spec:
               name: dev-shm
             - mountPath: /dev/video999 # must be the same as in `volumes` section and in cam.env
               name: dev-video
-      # securityContext:
-      #   runAsUser: 1000
-      #   # runAsGroup: video
-      #   # fsGroup: 2000
-      # tolerations:
-      #   - key: "rpi"
-      #     operator: "Exists"
-      #     effect: "NoSchedule"
       terminationGracePeriodSeconds: 10 # let it finish the sending the picture
       volumes:
         - name: dev-shm
