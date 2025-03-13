@@ -1,7 +1,19 @@
 # mediamtx
 
-Use [mediamtx](https://github.com/bluenviron/mediamtx) on another Raspberry Pi
-to create RTSP camera stream for test.
+Use [mediamtx](https://github.com/bluenviron/mediamtx) to create camera streams.
+
+This is extremely convenient:
+
+- easy to set up - single binary and single app config
+- supports different hardware (linux/windows/raspberry-pi)
+- supports various cameras ( USB / CSI) or remote streams
+  (push or transcode via ffmpeg)
+- having local video streams from multiple cameras for local network
+  (you can proxy it further if you need)
+- having different scripts to run to capture images from the stream and publish
+  them to Prusa Connect.
+
+So now you can have a cake and eat it in the same time!
 
 ## Exposing Raspberry Pi CSI camera
 
