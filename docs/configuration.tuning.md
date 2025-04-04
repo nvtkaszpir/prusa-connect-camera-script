@@ -285,6 +285,23 @@ CAMERA_COMMAND_EXTRA_PARAMS="-y -i 'http://esp32-wrover-0461c8.local:8080/' -vf 
 ```
 <!-- markdownlint-disable line_length -->
 
+### Adding timestamp to the image
+
+Add ffmpeg `-vf` with parameters to the ffmpeg to the processing pipeline before output (`-f` flag), something like below:
+
+```shell
+-vf 'drawtext=box=1:boxcolor=0x00000000@1:fontsize=60:fontcolor=yellow:text=%{localtime}:x=(w-text_w):y=(h-text_h)'
+```
+
+This will generate a yellow text in black background box in bottom right corner, and fontsize=60 works well with 1080p.
+
+Below is example full command, **notice the single quotes are important**:
+
+```shell
+CAMERA_COMMAND=ffmpeg
+CAMERA_COMMAND_EXTRA_PARAMS="-y -i 'http://esp32-wrover-0461c8.local:8080/' -vf 'transpose=1' -vframes 1 -q:v 1 -vf 'drawtext=box=1:boxcolor=0x00000000@1:fontsize=60:fontcolor=yellow:text=%{localtime}:x=(w-text_w):y=(h-text_h)' -f image2 -update 1 "
+```
+
 ### Other processing
 
 Frankly speaking you can do anything you want with ffmpeg, for example
