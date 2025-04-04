@@ -75,6 +75,9 @@ spec:
               name: script
             - mountPath: /dev/shm
               name: dev-shm
+            - name: timezone
+              mountPath: /etc/localtime
+              subPath: Europe/Warsaw
 
       terminationGracePeriodSeconds: 10
       volumes:
@@ -87,3 +90,7 @@ spec:
           configMap:
             name: script
             defaultMode: 0755
+
+        - name: timezone
+          hostPath:
+            path: /usr/share/zoneinfo
