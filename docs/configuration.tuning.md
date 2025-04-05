@@ -310,3 +310,17 @@ Frankly speaking you can do anything you want with ffmpeg, for example
 
 which effectively shuffles image blocks around.
 Why? why not :D
+
+### Image output quality
+
+To improve output image quality (especially when doing `-r 1 -update 1` from the constant stream) then add at the end
+
+```shell
+-b:v 8000k
+```
+
+For example:
+
+```shell
+ffmpeg -hide_banner -loglevel warning -f hls -i 'http://mediamtx-hls.intra.hlds.pl/cam/index.m3u8' -r 1 -update 1 -vf 'drawtext=box=1:boxcolor=0x00000000@1:fontsize=60:fontcolor=yellow:text=%{localtime}:x=16:y=(h-text_h)' -y -b:v 8000k /data/shared/snapshot.jpg
+```
