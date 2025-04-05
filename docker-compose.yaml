@@ -7,28 +7,33 @@ services:
     image: quay.io/kaszpir/prusa-connect-script
     read_only: true
     restart: unless-stopped
+    environment:
+      TZ: "Europe/Warsaw"
     env_file:
     - .docker-csi # copy docker-csi.dist as .docker-csi and adjust env vars
     devices:
     - /dev:/dev
     volumes:
+    - /usr/share/zoneinfo/:/usr/share/zoneinfo/:ro
     - /dev/:/dev/
     - /run/udev:/run/udev:ro
     - type: tmpfs
       target: /dev/shm
       tmpfs:
         size: 32MB
-
   # generic camera available as /dev/video0
   prusa-connect-cam-usb:
     image: quay.io/kaszpir/prusa-connect-script
     read_only: true
     restart: unless-stopped
+    environment:
+      TZ: "Europe/Warsaw"
     env_file:
     - .docker-video0 # copy docker-video0.dist as .docker-video0 and adjust env vars
     devices:
     - /dev:/dev
     volumes:
+    - /usr/share/zoneinfo/:/usr/share/zoneinfo/:ro
     - /dev/:/dev/
     - /run/udev:/run/udev:ro
     - type: tmpfs
@@ -41,9 +46,12 @@ services:
     image: quay.io/kaszpir/prusa-connect-script
     read_only: true
     restart: unless-stopped
+    environment:
+      TZ: "Europe/Warsaw"
     env_file:
     - .docker-esphome-snapshot # copy docker-esphome-snapshot.dist as .docker-esphome-snapshot and adjust env vars
     volumes:
+    - /usr/share/zoneinfo/:/usr/share/zoneinfo/:ro
     - type: tmpfs
       target: /dev/shm
       tmpfs:
