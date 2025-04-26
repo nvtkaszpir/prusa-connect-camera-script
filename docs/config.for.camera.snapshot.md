@@ -71,3 +71,22 @@ CAMERA_DEVICE=/dev/null
 CAMERA_COMMAND=curl
 CAMERA_COMMAND_EXTRA_PARAMS=http://192.168.2.92/images/snapshot0.jpg -o
 ```
+
+### MotionEye
+
+First, please see [MotionEye](./config.for.camera.motioneye.md) in order to
+to configure the camera.
+
+Assuming you want to get first camera snapshot (camera number `1`):
+
+```shell
+PRINTER_ADDRESS=127.0.0.1
+PRUSA_CONNECT_CAMERA_TOKEN=redacted
+PRUSA_CONNECT_CAMERA_FINGERPRINT=06f47777-f179-4025-bd80-9e4cb8db2aed
+CAMERA_DEVICE=/dev/null
+CAMERA_COMMAND=curl
+CAMERA_COMMAND_EXTRA_PARAMS=http://motioneye-ip:8765/picture/1/current/ -o
+```
+
+If you run the script on the same host as MotionEye you could just use
+`localhost` or `0.0.0.0` for the host, keeping the port as is.

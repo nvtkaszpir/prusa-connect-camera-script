@@ -64,6 +64,7 @@ nav:
     - CSI: config.for.camera.csi.libcamera.md
     - ESPHome Snapshot: config.for.camera.esphome.snapshot.md
     - ESPHome Stream: config.for.camera.esphome.stream.md
+    - MotionEye: config.for.camera.motioneye.md
     - USB: config.for.camera.usb.md
     - Web Cams - Snapshot: config.for.camera.snapshot.md
     - Web Cams - HLS streams: config.for.camera.hls.md

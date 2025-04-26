@@ -55,3 +55,27 @@ CAMERA_COMMAND_EXTRA_PARAMS="-y -i 'http://192.168.2.92/ipcam/mjpeg.cgi' -vframe
 
 Notice that it is better to use a snapshot instead of stream if available,
 see [here](./config.for.camera.snapshot.md#beagle-camera).
+
+## MotionEye
+
+First, please see [MotionEye](./config.for.camera.motioneye.md) in order to
+to configure the camera.
+
+Notice that maybe you should switch to a [snapshot](./config.for.camera.snapshot.md#motioneye),
+which is much more convenient.
+
+Assuming you want to get first camera stream on port `9081`:
+
+<!-- markdownlint-disable line_length -->
+```shell
+PRINTER_ADDRESS=127.0.0.1
+PRUSA_CONNECT_CAMERA_TOKEN=redacted
+PRUSA_CONNECT_CAMERA_FINGERPRINT=06f47777-f179-4025-bd80-9e4cb8db2aed
+CAMERA_DEVICE=/dev/null
+CAMERA_COMMAND=ffmpeg
+CAMERA_COMMAND_EXTRA_PARAMS="-y -i 'http://motion-eye.local:9081' -vframes 1 -q:v 1 -f image2 -update 1 "
+```
+<!-- markdownlint-enable line_length -->
+
+If you run the script on the same host as MotionEye you could just use
+`localhost` or `0.0.0.0` for the host, keeping the port as is.
