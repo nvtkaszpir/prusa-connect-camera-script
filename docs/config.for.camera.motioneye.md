@@ -8,6 +8,7 @@ MotionEye allows to expose current image or a stream per camera.
 * on the left scroll down to `Video streaming` section and make sure it is enabled
 (there is a slider on the left and it should show `[I]`).
 * select `Streaming Port` and set `Authentication mode` to `Disabled`.
+* remember to save the changes
 
 Now there are `Useful URLs` which can be used in two ways to get images
 
@@ -21,8 +22,9 @@ First camera snapshot should be available under address such as
 `http://<motioneye-ip>:8765/picture/1/current/`
 
 If you click on the URL in incognito mode it should present the image.
+If not, check [troubleshooting for MotionEye](https://github.com/motioneye-project/motioneye/wiki/Troubleshooting).
 
-If that works, then please see [snapshot](./config.for.camera.snapshot.md#motioneye)
+If that works, then please see [snapshot](./config.for.camera.snapshot.md#motioneye).
 
 ## Streaming URL
 
@@ -34,5 +36,6 @@ such as
 If you click on the URL in incognito mode it should present the stream.
 
 Optionally you could try `ffplay http://<motioneye-ip>:9081/` to test the video.
+If not, check [troubleshooting for MotionEye](https://github.com/motioneye-project/motioneye/wiki/Troubleshooting).
 
 If that works, then please see [mjpg](./config.for.camera.mjpg.md#motioneye).
