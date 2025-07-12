@@ -15,6 +15,11 @@ theme:
     primary: black
   logo: static/prusa-connect-cam.png
 
+extra:
+  analytics:
+    provider: google
+    property: G-2274DKHTEZ
+
 extra_css:
   - css/extra.css
 
@@ -48,37 +53,36 @@ nav:
   - About: index.md
 
   - Preparation:
-    - Requirements: requirements.md
-    - Known Limitations: known.limitations.md
-    - Installation: installation.md
+      - Requirements: requirements.md
+      - Known Limitations: known.limitations.md
+      - Installation: installation.md
   - Configuration:
-    - Overview: configuration.overview.md
-    - Env vars: configuration.env.md
+      - Overview: configuration.overview.md
+      - Env vars: configuration.env.md
   - Prusa Connect:
-    - Add camera to Prusa Connect: prusa.connect.md
+      - Add camera to Prusa Connect: prusa.connect.md
 
   - Camera configs:
-    - General overview: config.for.camera.md
-
-    - CSI (legacy): config.for.camera.csi.legacy.md
-    - CSI: config.for.camera.csi.libcamera.md
-    - ESPHome Snapshot: config.for.camera.esphome.snapshot.md
-    - ESPHome Stream: config.for.camera.esphome.stream.md
-    - MotionEye: config.for.camera.motioneye.md
-    - USB: config.for.camera.usb.md
-    - Web Cams - Snapshot: config.for.camera.snapshot.md
-    - Web Cams - HLS streams: config.for.camera.hls.md
-    - Web Cams - MJPG streams: config.for.camera.mjpg.md
-    - Web Cams - RTSP streams: config.for.camera.rtsp.md
+      - General overview: config.for.camera.md
+      - CSI (legacy): config.for.camera.csi.legacy.md
+      - CSI: config.for.camera.csi.libcamera.md
+      - ESPHome Snapshot: config.for.camera.esphome.snapshot.md
+      - ESPHome Stream: config.for.camera.esphome.stream.md
+      - MotionEye: config.for.camera.motioneye.md
+      - USB: config.for.camera.usb.md
+      - Web Cams - Snapshot: config.for.camera.snapshot.md
+      - Web Cams - HLS streams: config.for.camera.hls.md
+      - Web Cams - MJPG streams: config.for.camera.mjpg.md
+      - Web Cams - RTSP streams: config.for.camera.rtsp.md
 
   - Test:
-    - Test Config: test.config.md
-    - Troubleshooting: troubleshooting.md
+      - Test Config: test.config.md
+      - Troubleshooting: troubleshooting.md
   - Service:
-    - Overview: service.md
-    - Systemd: service.systemd.md
-    - Docker: service.docker.md
-    - Kubernetes: service.kubernetes.md
+      - Overview: service.md
+      - Systemd: service.systemd.md
+      - Docker: service.docker.md
+      - Kubernetes: service.kubernetes.md
 
   - Configuration Tuning: configuration.tuning.md
   - Configuration all env vars: configuration.env.full.md
@@ -86,5 +90,4 @@ nav:
   - Performance: performance.md
 
   - Advanced:
-
-    - Streaming cameras with mediamtx: stream.mediamtx.md
+      - Streaming cameras with mediamtx: stream.mediamtx.md
