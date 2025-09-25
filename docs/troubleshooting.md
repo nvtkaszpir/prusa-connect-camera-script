@@ -14,6 +14,9 @@ Things to check if it does not work.
   then probably you have issues with permissions when running script
   for the second time (see below)
 
+- check that the [Prusa Connect `cameras` service](https://status.prusa3d.com/)
+  is running
+
 ## System file permissions
 
 Check files under `/dev/shm/camera*` and `/dev/video0`
