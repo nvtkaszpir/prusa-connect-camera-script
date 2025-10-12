@@ -1,0 +1,11 @@
+.*
+!.pre-commit-config.yaml
+!.editorconfig
+!.cspell.json
+!.jscpd.json
+!.github/
+!.python-version
+!.markdownlint.json
+!.pyspelling.yml
+!.dockerignore
+!.gitignore
