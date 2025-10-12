@@ -45,7 +45,7 @@ snapshot frame on port `8081`.
 
 We can use curl to fetch it.
 
-```shell
+```text
 PRINTER_ADDRESS=127.0.0.1
 PRUSA_CONNECT_CAMERA_TOKEN=redacted
 PRUSA_CONNECT_CAMERA_FINGERPRINT=06f47777-f179-4025-bd80-9e4cb8db2aed

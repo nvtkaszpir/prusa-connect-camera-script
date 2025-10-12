@@ -32,7 +32,7 @@ docker_config: ## configure docker to allow multi-arch builds
 image_amd64: ARCH=amd64
 image_amd64: D_ARCH=amd64
 image_arm64: ARCH=arm64
-image_arm64:  D_ARCH=arm64
+image_arm64: D_ARCH=arm64
 image_arm-v7: ARCH=arm/v7
 image_arm-v7: D_ARCH=arm-v7
 image_amd64 image_arm64 image_arm-v7: docker_config ## build image for specific arch

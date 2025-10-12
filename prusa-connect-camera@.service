@@ -4,6 +4,12 @@ After=network.target systemd-udev-trigger.service
 Wants=network.target
 Requires=systemd-udev-trigger.service
 
+# Alternatively you can wait until the network is actually online,
+# in that case comment two lines in above section and uncomment two lines below
+# and do systemctl daemon-reload
+#After=network.target network-online.target
+#Wants=network-online.target
+
 [Service]
 User=pi
 Group=pi

@@ -47,7 +47,7 @@ snapshot frame on port `8081`.
 
 We can use curl to fetch it.
 
-```shell
+```text
 PRINTER_ADDRESS=127.0.0.1
 PRUSA_CONNECT_CAMERA_TOKEN=redacted
 PRUSA_CONNECT_CAMERA_FINGERPRINT=06f47777-f179-4025-bd80-9e4cb8db2aed
@@ -63,7 +63,7 @@ This is not tested, I do not own such camera so hard to tell if this is right.
 Camera URL for snapshot `http://192.168.2.92/images/snapshot0.jpg` so the config
 should be like below:
 
-```shell
+```text
 PRINTER_ADDRESS=127.0.0.1
 PRUSA_CONNECT_CAMERA_TOKEN=redacted
 PRUSA_CONNECT_CAMERA_FINGERPRINT=06f47777-f179-4025-bd80-9e4cb8db2aed
@@ -79,7 +79,7 @@ to configure the camera.
 
 Assuming you want to get first camera snapshot (camera number `1`):
 
-```shell
+```text
 PRINTER_ADDRESS=127.0.0.1
 PRUSA_CONNECT_CAMERA_TOKEN=redacted
 PRUSA_CONNECT_CAMERA_FINGERPRINT=06f47777-f179-4025-bd80-9e4cb8db2aed

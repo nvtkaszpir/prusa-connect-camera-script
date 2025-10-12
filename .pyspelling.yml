@@ -1,0 +1,13 @@
+---
+jobs: 4
+matrix:
+  - name: markdown
+    pipeline:
+      - pyspelling.filters.text
+    sources:
+      - '**/*.md'
+    default_encoding: utf-8
+    dictionary:
+      wordlists:
+        - .spell-dict
+      output: build/dictionary/markdown.dic

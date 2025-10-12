@@ -2,17 +2,34 @@
 
 Things to check if it does not work.
 
-## General
+## Generic examples
 
-- some USB cameras require physical unplugging/plug-in **AFTER**
-  the Raspberry Pi was turned on, there is no fix for this yet, see
-  [raspberrypi/linux/issues/6255](https://github.com/raspberrypi/linux/issues/6255)
-  for such example
+Documentation is filled with various examples, and the content differs on purpose.
+In some places examples are not double quoted so that they work as docker env
+vars loaded from a file. Thus if you do not use docker then you need to add
+double quotes to make them work under normal shell conditions.
 
-- check `/dev/shm/camera_*.stdout` and `/dev/shm/camera_*.stderr`
-  files for more details - if they state that 'everything is okay'
-  then probably you have issues with permissions when running script
-  for the second time (see below)
+For example if you see something like this
+
+<!-- markdownlint-disable line_length -->
+```text
+CAMERA_COMMAND_EXTRA_PARAMS=http://motioneye-ip:8765/picture/1/current -o
+```
+
+and it does not work in shell, then use double quotes, like this
+
+```shell
+CAMERA_COMMAND_EXTRA_PARAMS="--max-time 5 'http://another-cam.local:8081/snap.jpg' -o "
+```
+<!-- markdownlint-enable line_length -->
+
+In the docs this is visible as different code highlight blocks:
+
+* docker env var file -> `text` - no colors, no quotes
+* shell env vars -> `shell` with colored words/numbers and sections in quotes/doublequotes
+
+See [https://github.com/docker/cli/issues/3630](https://github.com/docker/cli/issues/3630)
+for more details.
 
 - check that the [Prusa Connect `cameras` service](https://status.prusa3d.com/)
   is running
@@ -44,23 +61,33 @@ is added to `video` group.
 
 ## Physical
 
-Check if the camera actually works - check cables if they are not damaged,
+* check if the camera actually works - check cables if they are not damaged,
 if the cables are properly plugged, if the camera connects to the network...
 Some cameras when accessed will turn on led light showing that they are used.
 
+* some USB cameras require physical unplugging/plug-in **AFTER**
+  the Raspberry Pi was turned on, there is no fix for this yet, see
+  [raspberrypi/linux/issues/6255](https://github.com/raspberrypi/linux/issues/6255)
+  for such example
+
+* check `/dev/shm/camera_*.stdout` and `/dev/shm/camera_*.stderr`
+  files for more details - if they state that 'everything is okay'
+  then probably you have issues with permissions when running script
+  for the second time (see below)
+
 ## Networking
 
-- if you use feature to ping the printer then ensure printer is up and running
+* if you use feature to ping the printer then ensure printer is up and running
   and responds to ping, or just disable the feature (set `PRINTER_ADDRESS=""` or
   to `PRINTER_ADDRESS=127.0.0.1`), also make sure to allow ICMP protocol
   on the firewalls on the target and on [docker host](https://github.com/moby/moby/issues/45031)
 
-- check IP/domain names for remote camera - try that you can access camera over
+* check IP/domain names for remote camera - try that you can access camera over
   IP address, otherwise you have a [DNS issues](https://www.reddit.com/r/homelab/comments/5i6kza/a_haiku_about_dns/).
 
 ## Camera Parameters
 
-- check if the camera supports passed parameters such as resolution and codec,
+* check if the camera supports passed parameters such as resolution and codec,
   especially after replacing the camera - see [tuning](./configuration.tuning.md)
   how to use `v4l2-ctl` to see available camera options.
 
@@ -92,11 +119,11 @@ but this is quite a lot of work to do.
 
 ## Docker troubleshooting
 
-- dockerized script - ensure you restart the pi after adding docker,
+* dockerized script - ensure you restart the pi after adding docker,
   check user permissions to the mounted files and devices (unfortunately this can
   get very messy with direct access to the devices and files on the host)
 
-- check IP/domain names for remote camera - ensure that you can access camera
+* check IP/domain names for remote camera - ensure that you can access camera
   over IP address (or fully qualified domain name), because `.local` or `.lan`
   domains are not resolved. Another option is to reconfigure docker to use proper
   local DNS servers and not generic `8.8.8.8`.
@@ -118,13 +145,13 @@ but this is quite a lot of work to do.
 If the script runs locally but service is not running then you can get the logs
 like below, ensure to replace `env` with the name your camera is using:
 
-- stop service
+* stop service
 
   ```shell
   sudo systemctl stop prusa-connect-camera@env.service
   ```
 
-- open new terminal and type:
+* open new terminal and type:
 
   ```shell
   sudo journalctl -f -u prusa-connect-camera
@@ -132,7 +159,7 @@ like below, ensure to replace `env` with the name your camera is using:
 
   and keep it open
 
-- get back to the first terminal and write commands:
+* get back to the first terminal and write commands:
 
   ```shell
   sudo systemctl start prusa-connect-camera@env.service
@@ -140,10 +167,10 @@ like below, ensure to replace `env` with the name your camera is using:
   sudo systemctl stop prusa-connect-camera@env.service
   ```
 
-- get back to the terminal with running journalctl and see the logs
+* get back to the terminal with running journalctl and see the logs
   and look carefully at the errors described there
 
-- copy the output from `starting` to the another `starting` command and paste
+* copy the output from `starting` to the another `starting` command and paste
   on GitHub
 
 ### Permissions issues
