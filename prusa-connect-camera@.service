@@ -1,14 +1,11 @@
 [Unit]
 Description=Prusa Connect Camera Script
-After=network.target systemd-udev-trigger.service
-Wants=network.target
 Requires=systemd-udev-trigger.service
+StartLimitIntervalSec=0 # disable any burst rate limiting in restarts
 
 # Alternatively you can wait until the network is actually online,
-# in that case comment two lines in above section and uncomment two lines below
-# and do systemctl daemon-reload
-#After=network.target network-online.target
-#Wants=network-online.target
+After=network.target network-online.target
+Wants=network-online.target
 
 [Service]
 User=pi
@@ -16,7 +13,7 @@ Group=pi
 EnvironmentFile=/home/pi/src/prusa-connect-camera-script/.%i
 ExecStart=/home/pi/src/prusa-connect-camera-script/prusa-connect-camera.sh
 Restart=always
-RestartSec=15
+RestartSec=5s
 
 [Install]
 WantedBy=multi-user.target
