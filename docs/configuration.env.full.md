@@ -13,6 +13,10 @@ Config for camera is to the script as environment variables (env vars).
   in Prusa Connect then uploaded images will be uploaded but they are discarded
   by Prusa Connect.
 
+* `PRUSA_CONNECT_CAMERA_NAME` - if the string is not empty then it will set
+  the name of the camera to a given string, example
+  `PRUSA_CONNECT_CAMERA_NAME='Camera in the back'`
+
 * `PRUSA_CONNECT_CAMERA_TOKEN` - required, Prusa Connect API key
 
 * `PRUSA_CONNECT_CAMERA_FINGERPRINT` - required, Prusa Connect camera fingerprint,
@@ -68,8 +72,9 @@ Config for camera is to the script as environment variables (env vars).
   printers you may need to increase this value on system level.
 
 * `CURL_EXTRA_PARAMS` - extra params to curl when pushing an image,
-  default empty value, but you could for example add additional params if needed
-  such as `-k` if using TLS proxy with self-signed certificate
+  default is verbose mode, but you could for example add additional params if needed
+  such as `-k` if using TLS proxy with self-signed certificate.
+  To turn off the log spam just set it to `--silent --max-time 5`
 
 * `PRUSA_CONNECT_URL` - Prusa Connect endpoint where to post images,
   default value `https://webcam.connect.prusa3d.com/c/snapshot`.

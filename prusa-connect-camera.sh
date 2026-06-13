@@ -10,6 +10,10 @@
 # set to empty value to disable this feature
 : "${PRINTER_ADDRESS:=}"
 
+# Camera name to set on start only, by default it leaves it as is
+# set to PRUSA_CONNECT_CAMERA_NAME='My Camera 1' to set it on app start
+: "${PRUSA_CONNECT_CAMERA_NAME:=}"
+
 # Prusa Connect API key
 : "${PRUSA_CONNECT_CAMERA_TOKEN:=unset}"
 # Prusa Connect camera fingerprint, use for example 'uuidgen' to generate it, it must be at least 16 alphanumeric chars, 40 max
@@ -73,6 +77,16 @@ if [[ "${PRUSA_CONNECT_CAMERA_FINGERPRINT}" = "unset" ]]; then
   exit 1
 fi
 
+if [[ -n "${PRUSA_CONNECT_CAMERA_NAME}" ]]; then
+echo "Setting camera name to: ${PRUSA_CONNECT_CAMERA_NAME}"
+curl \
+  -H "Content-type: application/json" \
+  -H "Fingerprint: ${PRUSA_CONNECT_CAMERA_FINGERPRINT}" \
+  -H "Token: ${PRUSA_CONNECT_CAMERA_TOKEN}" \
+  --data "{\"config\": {\"name\": \"${PRUSA_CONNECT_CAMERA_NAME}\"}}" \
+  -X PUT "${PRUSA_CONNECT_URL%/c/snapshot}/c/info" \
+  ${CURL_EXTRA_PARAMS}
+fi
 
 if [[ ! -r "${CAMERA_DEVICE}" ]]; then
   echo "ERROR: Could not read camera device CAMERA_DEVICE=${CAMERA_DEVICE}"

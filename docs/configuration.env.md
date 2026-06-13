@@ -10,6 +10,7 @@ The most important env vars are:
 * `PRUSA_CONNECT_CAMERA_FINGERPRINT`
 * `CAMERA_COMMAND`
 * `CAMERA_COMMAND_EXTRA_PARAMS`
+* `PRUSA_CONNECT_CAMERA_NAME`
 
 Those env vars will be filled in the next steps.
 
