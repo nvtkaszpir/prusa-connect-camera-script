@@ -210,6 +210,7 @@ while true; do
     --data-binary "@${TARGET_DIR}/camera_${PRUSA_CONNECT_CAMERA_FINGERPRINT}.jpg" \
     --no-progress-meter \
     --compressed \
+    -L \
     -w "%{http_code}\n" \
     ${CURL_EXTRA_PARAMS}
   # healchcheck
