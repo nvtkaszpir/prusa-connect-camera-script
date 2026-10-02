@@ -29,7 +29,7 @@ fswebcam -d /dev/video0 --resolution 640x480 --no-banner /dev/shm/camera_87299de
 
 and get the outputs from the command, and also it should write an image.
 
-Check for errors, if any, if everything is ok you should see a lot of `204`
+Check for errors, if any, if everything is ok you should see a lot of `200`
 every 10s.
 
 If not, see [troubleshooting](./troubleshooting.md), copy logs

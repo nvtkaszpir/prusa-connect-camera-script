@@ -56,7 +56,7 @@
 : "${CURL_EXTRA_PARAMS:=--verbose --max-time 5}"
 
 ## end of config, do not modify (unless you know what you are doing)
-: "${PRUSA_CONNECT_URL:=https://webcam.connect.prusa3d.com/c/snapshot}"
+: "${PRUSA_CONNECT_URL:=https://camera-service.prusa3d.com/c/snapshot}"
 
 # validators
 if ! [[ -w "${TARGET_DIR}" ]]; then
@@ -200,7 +200,7 @@ while true; do
   # get captured image size, this is required by Prusa Connect API
   image_size=$(stat --printf="%s"  "${TARGET_DIR}/camera_${PRUSA_CONNECT_CAMERA_FINGERPRINT}.jpg")
 
-  # push image to Prusa Connect, print return code, it should be 204 if all is ok, if not then you will see error message
+  # push image to Prusa Connect, print return code, it should be 200 if all is ok, if not then you will see error message
   curl -X PUT "${PRUSA_CONNECT_URL}" \
     -H "Accept: text/plain" \
     -H "Content-type: image/jpg" \
