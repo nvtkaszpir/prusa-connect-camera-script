@@ -77,7 +77,7 @@ Config for camera is to the script as environment variables (env vars).
   To turn off the log spam just set it to `--silent --max-time 5`
 
 * `PRUSA_CONNECT_URL` - Prusa Connect endpoint where to post images,
-  default value `https://webcam.connect.prusa3d.com/c/snapshot`.
+  default value `https://connect.prusa3d.com/c/snapshot`.
   You could put here Prusa Connect Proxy if you use one.
 
 For more in-depth details (no need to repeat them here) please see the top of

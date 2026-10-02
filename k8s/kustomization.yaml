@@ -30,4 +30,4 @@ configMapGenerator:
 images:
   - name: quay.io/kaszpir/prusa-connect-script
     newName: bagno.hlds.pl:16000/quay.io/kaszpir/prusa-connect-script
-    newTag: "3ebbd2c"
+    newTag: "291f656"
