@@ -3,7 +3,7 @@ GIT_SOURCE := $(shell git config --get remote.origin.url)
 URL := $(shell yq '.site_url' mkdocs.yml)
 QUAY_REPO_USER := kaszpir
 QUAY_REPO_NAME := prusa-connect-script
-
+SHELL := /bin/bash
 
 .DEFAULT_GOAL := help
 
@@ -99,3 +99,6 @@ quay: ## build images and push to quay.io
 .PHONY: docs
 docs: ## run mkdocs serve
 	mkdocs serve
+
+test_laptop:
+	source .laptop && ./prusa-connect-camera.sh

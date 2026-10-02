@@ -53,10 +53,10 @@
 # where to save camera images (they will be overwritten every time
 : "${TARGET_DIR:=/dev/shm}"
 # extra params to curl when pushing an image
-: "${CURL_EXTRA_PARAMS:=--verbose --max-time 5}"
+: "${CURL_EXTRA_PARAMS:=--verbose --max-time 50}"
 
 ## end of config, do not modify (unless you know what you are doing)
-: "${PRUSA_CONNECT_URL:=https://webcam.connect.prusa3d.com/c/snapshot}"
+: "${PRUSA_CONNECT_URL:=https://connect.prusa3d.com/c/snapshot}"
 
 # validators
 if ! [[ -w "${TARGET_DIR}" ]]; then
